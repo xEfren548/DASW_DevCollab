@@ -37,11 +37,11 @@ projectSchema.statics.getTareaByID = async(uid) =>{
     return doc;
 }
 
-projectSchema.statics.crearTarea = async(datosTarea) =>{
-    let newTarea = Tarea(datosTarea);
-    console.log(newTarea);
+projectSchema.statics.crearProyecto = async(datosProyecto) =>{
+    let newProject = Proyecto(datosProyecto);
+    console.log(newProject);
     
-    return await newTarea.save();
+    return await newProject.save();
 }
 
 projectSchema.statics.actualizarTarea = async(uid, datosTarea) => {

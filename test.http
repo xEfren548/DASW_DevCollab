@@ -1,7 +1,15 @@
 @host = http://localhost:3001
 
 ###
-GET {{host}}
+GET {{host}}/api/projects
 
 ###
-GET http://localhost:3001/api/projects
+POST {{host}}/api/projects
+Content-Type: application/json
+
+{
+    "title": "test2",
+    "description": "test desc",
+    "creationDate": "20230505",
+    "available": "true"
+}

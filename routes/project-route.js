@@ -1,8 +1,8 @@
 const router = require('express').Router();
-//const {validarBodyTarea} = require('../middlewares/validarDatos.js');
-//const {validarToken} = require('../middlewares/validarDatos.js');
+const {validarBodyProyecto} = require('../middlewares/validar-datos.js');
+//const {validarToken} = require('../middlewares/validar-datos.js');
 const {Proyecto} = require('../db/Proyecto.js');
-//const {nanoid} = require('nanoid')
+const {nanoid} = require('nanoid')
 
 router.get('/', async(req,res) => {
     let filtro = {}
@@ -22,13 +22,13 @@ router.get('/', async(req,res) => {
     res.send(projects);
 })
 
-/*
-router.post('/', validarToken, validarBodyTarea, async (req, res) => {
-    let {titulo, descripcion, fechaLimite, completado} = req.body;
-    console.log(nanoid());
-    let newDoc = await Tarea.crearTarea({uid: nanoid(), titulo, descripcion, fechaLimite, completado});
+
+router.post('/', validarBodyProyecto, async (req, res) => {
+    let {title, description, creationDate, available} = req.body;
+    //console.log(nanoid());
+    let newDoc = await Proyecto.crearProyecto({uid: nanoid(), title, description, creationDate, available});
     res.status(201).send(newDoc);
 })
-*/
+
 
 module.exports = router;
