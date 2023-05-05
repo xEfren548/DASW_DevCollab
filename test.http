@@ -1,4 +1,7 @@
 @host = http://localhost:3001
 
 ###
-GET {{host}}/api/projects
+GET {{host}}
+
+###
+GET http://localhost:3001/api/projects

@@ -1,24 +1,24 @@
 const router = require('express').Router();
 //const {validarBodyTarea} = require('../middlewares/validarDatos.js');
 //const {validarToken} = require('../middlewares/validarDatos.js');
-const {Project} = require('../db/Proyecto.js');
+const {Proyecto} = require('../db/Proyecto.js');
 //const {nanoid} = require('nanoid')
 
-router.get('/api/projects', async(req,res) => {
+router.get('/', async(req,res) => {
     let filtro = {}
-    let {titulo, descripcion, completado} = req.query;
-    if(titulo){
-        filtro.titulo = new RegExp(titulo, 'i');
+    let {title, description, available} = req.query;
+    if(title){
+        filtro.title = new RegExp(title, 'i');
     }
-    if(descripcion){
-        filtro.descripcion = new RegExp(descripcion, 'i');
+    if(description){
+        filtro.description = new RegExp(descripcion, 'i');
     }
-    if(completado!=undefined){
-        console.log("completado" ,completado);
-        filtro.completado = completado== "true" ? true : false;
+    if(available!=undefined){
+        console.log("available" ,available);
+        filtro.available = available== "true" ? true : false;
     }
 
-    let projects = await Project.getProjects(filtro);
+    let projects = await Proyecto.getProjects(filtro);
     res.send(projects);
 })
 
