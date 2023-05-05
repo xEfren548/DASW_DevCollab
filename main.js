@@ -10,6 +10,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json())
 
 //app.use('/api/tasks', taskRouter)
-app.use('/api/login', authRouter)
+//app.use('/api/login', authRouter)
 
 app.listen(port, ()=> console.log("Running on port "+ port))
