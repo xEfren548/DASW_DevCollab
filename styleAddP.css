@@ -1,0 +1,144 @@
+/*
+@import url("https://fonts.googleapis.com/css?family=Varela+Round");
+@import url('https://fonts.googleapis.com/css2?family=Overpass:wght@400;700&display=swap');
+
+:root {
+  --color-1: #21d4fd;
+  --color-2: #b721ff;
+  --color-3: #08aeea;
+  --color-4: #2af598;
+}
+.Header {
+    position: relative;
+    height: 80vh;
+    display: block;
+  }
+  
+  .Header-details-main{
+      position: relative;
+      height: 13vh;
+      display: block;
+      margin-bottom: 1rem;
+  }
+  .Header-background{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(19deg, var(--color-1), var(--color-2));
+    transform-origin: 0px 0px;
+    transform: skewY(-10deg);
+    overflow: hidden;
+    z-index: -1;
+  }
+  
+  .Header-details-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(19deg, var(--color-1), var(--color-2));
+      transform-origin: 0px 0px;
+      /* transform: skewY(-10deg); */
+      overflow: hidden;
+      z-index: -1;
+    }
+  
+  
+  .Header-background::before,
+  .Header-background::after,
+  .Header-details::before,
+  .Header-details::after {
+    display: block;
+    position: absolute;
+    content: '';
+    width: 80%;
+    height: 33.333333333333336%;
+    opacity: 0.3;
+    filter: blur(15px);
+  }
+  .Header-background::before, .Header-details::before {
+    background: var(--color-1);
+    right: 0;
+  }
+  .Header-background::after, .Header-details::after {
+    background: var(--color-2);
+    bottom: 0;
+  }
+  
+  .Header-content {
+    text-align: center;
+    padding: 4rem 4rem;
+    margin: 0 auto;
+  }
+  @media (min-width: 58rem) {
+    .Header-content {
+      text-align: left;
+      padding: 10rem 4rem;
+      max-width: 54rem;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+  .Header-hero h1,
+  .Header-hero p {
+    color: #fff;
+    text-shadow: 0 0.5rem 1rem rgba(50,0,100,0.1);
+    font-family: 'Varela Round', sans-serif !important;
+  
+  }
+  .Header-hero h1 {
+    margin: 0;
+    font-size: 3rem;
+  }
+  .Header-hero p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .Header-visuals {
+    position:relative;
+    margin-top: 5rem;
+    transform: rotate(-10deg);
+    left: 100px;
+    top: 100px;
+  }
+  
+  .Header-visuals-details{
+      position: absolute;
+      top: 0;
+      left:0;
+  }
+  
+  .Header-visuals-details img{
+      width:33%;
+      height: 80%;
+  }
+  
+  @media (min-width: 58rem) {
+    .Header-visuals {
+      margin: 0;
+      transform: translateY(-5rem) rotate(-10deg);
+    }
+  
+  }
+  
+  @media (max-width:57rem){
+        .Header-visuals{
+          position: absolute;
+          top: 50%;
+          /* transform: translate(-50%, -50%); */
+  
+    }
+  }
+
+body {
+  font-family: 'Overpass', sans-serif;
+  background-color: black !important;
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+
+  */
