@@ -23,4 +23,13 @@ Content-Type: application/json
 }
 
 ###
+PUT {{host}}/api/projects/FXns2kfvY5vjKZClxVcS8/notavailable
+Content-Type: application/json
+
+{
+    "available": "true"
+}
+
+
+###
 DELETE {{host}}/api/projects/1

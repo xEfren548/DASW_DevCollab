@@ -32,8 +32,6 @@ router.post('/', validarBodyProyecto, async (req, res) => {
 
 router.put('/:uid', async (req, res) => {
     let uid = req.params.uid;
-    console.log('uid: ');
-    console.log(uid);
     let {title, description} = req.body;
 
     let projectDoc = await Proyecto.getProjectByID(uid);
@@ -79,6 +77,26 @@ router.delete('/:uid', async(req, res) => {
     console.log('Usuario borrado');
     console.log(deleted);
 
+})
+
+router.put('/:uid/notavailable', async(req,res) => {
+    let uid = req.params.uid;
+    let {available} = req.body;
+    
+    let projectDoc = await Proyecto.getProjectByID(uid);
+
+    if(!projectDoc) {
+        res.status(404).send({error: "Project not found"});
+        return;
+    }
+
+    projectDoc.available = available;
+    await projectDoc.save();
+
+    res.status(200).send({success: "Project updated"});
+
+
+    //setProyectStatus
 })
 
 
