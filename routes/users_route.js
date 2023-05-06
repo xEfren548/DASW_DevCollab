@@ -37,8 +37,9 @@ router.get('/', async (req,res)=>{
 
     if(email) 
         filtros.email = new RegExp(email,'i')
+    
 
-    let users  = await User.getUser()
+    let users  = await User.getUser(filtros)
     console.log(users)
     res.send(users)
 })

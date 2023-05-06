@@ -81,18 +81,10 @@ userSchema.statics.deleteUser = async (email)=>{
     return doc;
 }
 
-let User = mongoose.model('user',userSchema)
+const User = mongoose.model('User',userSchema)
 
 
-User.getUsers({},true)
-
-
-
-
-
-
-
-
+//User.getUsers()
 
 // updateUser("test3@test.com", {username:"test33333", password:"54321"})
 // getUserByEmail("test3@test.com")
