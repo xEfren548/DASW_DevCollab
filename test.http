@@ -21,3 +21,6 @@ Content-Type: application/json
 {
     "description": "new description"
 }
+
+###
+DELETE {{host}}/api/projects/1

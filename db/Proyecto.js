@@ -49,8 +49,9 @@ projectSchema.statics.actualizarProyecto = async(uid, datosProyecto) => {
     return updatedProject;
 }
 
-projectSchema.statics.borrarTarea = async(uid) => {
-    let doc = await Tarea.findOneAndDelete({uid});
+projectSchema.statics.borrarProyecto = async(uid) => {
+    console.log(`uid: ${uid}`);
+    let doc = await Proyecto.findOneAndDelete({uid});
     console.log("Borrado");
     return doc;
 }

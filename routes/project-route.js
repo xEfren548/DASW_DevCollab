@@ -64,5 +64,22 @@ router.put('/:uid', async (req, res) => {
 
 })
 
+router.delete('/:uid', async(req, res) => {
+    let uid = req.params.uid;
+    let userDoc = await Proyecto.getProjectByID(uid);
+    console.log(userDoc);
+
+    if(!userDoc){
+        res.status(404).send({error: "No existe proyecto"})
+        return;
+    }
+
+    let deleted = await Proyecto.borrarProyecto(uid);
+    res.send(deleted);
+    console.log('Usuario borrado');
+    console.log(deleted);
+
+})
+
 
 module.exports = router;
