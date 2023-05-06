@@ -70,7 +70,7 @@ router.get('/:test', (req, res) => {
 // 2) convertir funcion de put en async
 // 3) usar User.updateUser
 
-router.put('/:email',authStrict, async(req,res)=>{
+router.put('/:email', async(req,res)=>{
     
     let userDoc = await User.getUserByEmail(req.params.email)
 
@@ -93,6 +93,7 @@ router.put('/:email',authStrict, async(req,res)=>{
         // fs.writeFileSync(path.join('data','users.json'), JSON.stringify(users))
     let changedUser = await User.updateUser(email, updateUser);
     
+    console.log(users)
     res.send(changedUser)
 
 })
@@ -111,7 +112,7 @@ router.post('/',validateCreator,async (req,res)=>{
         return;
     }
 
-    let newUser = {id: nanoid.nanoid(),username,email,password}
+    let newUser = {uid: nanoid.nanoid(),username,email,password}
     let existeUsuario = await User.getUserByEmail(newUser.email)
 
     if(existeUsuario){

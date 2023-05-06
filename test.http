@@ -36,3 +36,25 @@ DELETE {{host}}/api/projects/1
 
 ###
 GET {{host}}/api/users
+
+###
+POST {{host}}/api/users
+Content-Type: application/json
+x-creator: 12345
+
+{
+    "username":"juan",
+    "email":"juan@mail.com",
+    "password":"1234"
+}
+
+###
+PUT {{host}}/api/users
+Content-Type: application/json
+
+{
+    "email":"juan1@mail.com"
+}
+
+###
+DELETE {{host}}/api/users
