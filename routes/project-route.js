@@ -30,5 +30,14 @@ router.post('/', validarBodyProyecto, async (req, res) => {
     res.status(201).send(newDoc);
 })
 
+router.put('/:id', async (req, res) => {
+    let {title, description, creationDate, available} = req.body;
+
+    if(title){
+        let updatedProject = await Proyecto.actualizarProyecto(id, )
+    }
+
+})
+
 
 module.exports = router;
