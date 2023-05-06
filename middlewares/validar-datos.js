@@ -10,6 +10,16 @@ function validarBodyProyecto(req, res, next){
 
     res.status(400).send({error: "Faltan atributos, revisar"})
 }
+function validarMensaje(req,res,next){
+    let {sender, projectId, content, timestamp} = req.body;
+    if(sender&& projectId&& content&& timestamp){
+        next()
+        return;
+    }
+    else{
+        res.status(400).send({error: "Faltan atributos para el mensaje, revisar"})
+    }
+}
 
 function validarToken(req, res, next){
     let token = req.get('x-token');
@@ -31,4 +41,4 @@ function validarToken(req, res, next){
 
 }
 
-module.exports = {validarBodyProyecto, validarToken};
+module.exports = {validarBodyProyecto, validarToken, validarMensaje};
