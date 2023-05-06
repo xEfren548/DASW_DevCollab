@@ -33,3 +33,4 @@ Content-Type: application/json
 
 ###
 DELETE {{host}}/api/projects/1
+

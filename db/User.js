@@ -2,6 +2,11 @@ const {mongoose} = require('./connectdb')
 const { nanoid} = require('nanoid')
 
 let userSchema =  mongoose.Schema({
+    uid: {
+        type: String,
+        unique: true,
+        required: true,
+    },
     email: {
         type: String,
         unique: true,
@@ -16,6 +21,19 @@ let userSchema =  mongoose.Schema({
         required: true
     }
 })
+
+userSchema.statics.getUser = async(filtros)=>{
+    let docs = await User.find(filtros)
+    console.log(docs);
+    return docs;
+}
+
+
+userSchema.statics.getUserById= async(uid) => {
+    let doc = await  User.findOne({uid})
+    console.log(doc);
+    return doc
+}
 
 //User.getUsers({},true)
 userSchema.statics.getUsers =   async (filtros={}, isAdmin=false)=>{
