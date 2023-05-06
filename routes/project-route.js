@@ -30,12 +30,37 @@ router.post('/', validarBodyProyecto, async (req, res) => {
     res.status(201).send(newDoc);
 })
 
-router.put('/:id', async (req, res) => {
-    let {title, description, creationDate, available} = req.body;
+router.put('/:uid', async (req, res) => {
+    let uid = req.params.uid;
+    console.log('uid: ');
+    console.log(uid);
+    let {title, description} = req.body;
+
+    let projectDoc = await Proyecto.getProjectByID(uid);
+
+    if(!projectDoc) {
+        res.status(404).send({error: "Project not found"});
+        return;
+    }
+
+    // req.body.email = req.params.email;
+
+
+    let updateProject={}
 
     if(title){
-        let updatedProject = await Proyecto.actualizarProyecto(id, )
+        updateProject.title = title;
     }
+    if(description){
+        updateProject.description = description;
+    }
+
+    //projectDoc.actualizarProyecto(uid, updateProject);
+
+    let changedUser = await Proyecto.actualizarProyecto(uid, updateProject);
+        // fs.writeFileSync(path.join('data', 'users.json'), JSON.stringify(users));
+    res.send(changedUser);
+
 
 })
 

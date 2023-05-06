@@ -32,7 +32,7 @@ projectSchema.statics.getProjects = async(filtros) =>{
 }
 
 projectSchema.statics.getProjectByID = async(uid) =>{
-    let doc = await Tarea.findOne({uid});
+    let doc = await Proyecto.findOne({uid});
     console.log(doc);
     return doc;
 }
@@ -44,7 +44,7 @@ projectSchema.statics.crearProyecto = async(datosProyecto) =>{
     return await newProject.save();
 }
 
-projectSchema.statics.actualizarProjecto = async(uid, datosProyecto) => {
+projectSchema.statics.actualizarProyecto = async(uid, datosProyecto) => {
     let updatedProject = await Proyecto.findOneAndUpdate({uid}, {$set: datosProyecto}, {new: true});
     return updatedProject;
 }

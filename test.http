@@ -13,3 +13,11 @@ Content-Type: application/json
     "creationDate": "20230505",
     "available": "true"
 }
+
+###
+PUT {{host}}/api/projects/FXns2kfvY5vjKZClxVcS8
+Content-Type: application/json
+
+{
+    "description": "new description"
+}
