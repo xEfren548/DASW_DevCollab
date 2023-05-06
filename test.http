@@ -34,3 +34,5 @@ Content-Type: application/json
 ###
 DELETE {{host}}/api/projects/1
 
+###
+GET {{host}}/api/users

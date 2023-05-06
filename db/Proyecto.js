@@ -60,7 +60,7 @@ projectSchema.statics.borrarProyecto = async(uid) => {
 const Proyecto = mongoose.model('Proyecto', projectSchema );
 
 // Tarea.crearTarea({uid:"12345", titulo: "Practica redes inalambricas", descripcion: "Practica", fechaLimite: "20230424"})
-Proyecto.getProjects()
+//Proyecto.getProjects()
 // Tarea.getTareaByID("12345")
 // Tarea.borrarTarea("1234");
 

@@ -2,7 +2,6 @@
 const router = require('express').Router();
 const {authStrict, validateCreator} = require('../middlewares/auth')
 const {User} = require('../db/User.js')
-const users = require('../data/users.json');
 const nanoid = require('nanoid');
 const fs = require('fs');
 const path = require('path')
@@ -39,8 +38,8 @@ router.get('/', async (req,res)=>{
     if(email) 
         filtros.email = new RegExp(email,'i')
 
-    let users  = await User.getUsers(filtros,isAdmin)
-
+    let users  = await User.getUser()
+    console.log(users)
     res.send(users)
 })
 
