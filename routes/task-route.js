@@ -10,24 +10,22 @@ router.get("/:projectId", async (req, res) => {
 
 router.post("/:projectId", async (req, res) => {
   const { projectId } = req.params;
-  const { title, description, deadline } = req.body;
+  const { title, description } = req.body;
   const newTask = await Task.createTask({
     uid: nanoid(),
     projectId,
     title,
     description,
-    deadline,
   });
   res.status(201).send(newTask);
 });
 
 router.put("/:uid", async (req, res) => {
   const { uid } = req.params;
-  const { title, description, deadline, status } = req.body;
+  const { title, description, status } = req.body;
   const updatedTask = await Task.updateTask(uid, {
     title,
     description,
-    deadline,
     status,
   });
   if (!updatedTask) {
