@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const { nanoid } = require("nanoid");
-const { Task } = require("../db/Proyecto.js");
+const { Task } = require("../db/task.js");
 
 router.get("/:projectId", async (req, res) => {
   const { projectId } = req.params;
@@ -10,30 +10,19 @@ router.get("/:projectId", async (req, res) => {
 
 router.post("/:projectId", async (req, res) => {
   const { projectId } = req.params;
-  const { title, description } = req.body;
-  const newTask = await Task.createTask({
-    uid: nanoid(),
-    projectId,
-    title,
-    description,
-  });
+  const { title } = req.body;
+  const newTask = await Task.createTask(nanoid(), projectId, title);
+
   res.status(201).send(newTask);
 });
 
-router.put("/:uid", async (req, res) => {
-  const { uid } = req.params;
-  const { title, description, status } = req.body;
-  const updatedTask = await Task.updateTask(uid, {
-    title,
-    description,
-    status,
-  });
-  if (!updatedTask) {
-    res.status(404).send({ error: "Task not found" });
-    return;
-  }
+router.put("/:taskId", async (req, res) => {
+  const { taskId } = req.params;
+  const { status } = req.body;
+  const updatedTask = await Task.updateTaskStatus(taskId, status);
   res.send(updatedTask);
 });
+
 
 router.delete("/:uid", async (req, res) => {
   const { uid } = req.params;
@@ -46,3 +35,4 @@ router.delete("/:uid", async (req, res) => {
 });
 
 module.exports = router;
+
