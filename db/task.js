@@ -1,3 +1,6 @@
+const {mongoose} = require('./connectdb');
+
+
 const taskSchema = mongoose.Schema({
     uid: {
       type: String,
@@ -19,6 +22,18 @@ const taskSchema = mongoose.Schema({
     },
   });
   
+  taskSchema.statics.createTask = async function(uid, projectId, title, status = "todo") {
+    const task = new this({
+      uid,
+      projectId,
+      title,
+      status,
+    });
+    const newTask = await task.save();
+    return newTask;
+  };
+  
+
   taskSchema.statics.getTasksByProject = async (projectId) => {
     let tasks = await Task.find({ projectId });
     return tasks;
@@ -28,7 +43,23 @@ const taskSchema = mongoose.Schema({
     let task = await Task.findOne({ uid });
     return task;
   };
+
+  taskSchema.statics.updateTaskStatus = async function(uid, newStatus) {
+    const task = await this.findOne({ uid });
+    if (!task) {
+      throw new Error("Task not found");
+    }
+      task.status = newStatus;
+      const updatedTask = await task.save();
+    return updatedTask;
+  };
+  taskSchema.statics.deleteTask = async(uid) => {
+    let t = await Task.findOneAndDelete({uid});
+    console.log("Borrado");
+    return t;
+}
+  
   
 const Task = mongoose.model("Task", taskSchema);
 
-module.exports = { Proyecto, Task };
+module.exports = { Task };
