@@ -4,7 +4,7 @@ const {validarMensaje} = require('../middlewares/validar-datos.js');
 const router = express.Router();
 const { Message } = require('../db/Mensaje.js');
 
-router.post('/messages',validarMensaje, async (req, res) => {
+router.post('/',validarMensaje, async (req, res) => {
     const { sender, projectId, content } = req.body;
     
     const newMessage = await Message.create({ sender, projectId, content });
@@ -12,13 +12,13 @@ router.post('/messages',validarMensaje, async (req, res) => {
     res.status(201).send(newMessage);
 });
 
-router.get('/messages/:projectId', async (req, res) => {
+router.get('/:projectId', async (req, res) => {
     const projectId = req.params.projectId;
     const messages = await Message.find({ projectId }).populate('sender');
     res.send(messages);
 });
 
-router.delete('/messages/:projectId', async (req, res) => {
+router.delete('/:projectId', async (req, res) => {
     const projectId = req.params.projectId;
     try {
       const result = await Message.deleteMessagesByProjectId(projectId);
@@ -32,5 +32,7 @@ router.delete('/messages/:projectId', async (req, res) => {
 
 
 module.exports = router;
+
+
 
 
