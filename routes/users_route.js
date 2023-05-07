@@ -93,7 +93,7 @@ router.put('/:email', async(req,res)=>{
         // fs.writeFileSync(path.join('data','users.json'), JSON.stringify(users))
     let changedUser = await User.updateUser(email, updateUser);
     
-    console.log(users)
+    
     res.send(changedUser)
 
 })

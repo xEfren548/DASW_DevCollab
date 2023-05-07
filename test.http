@@ -48,13 +48,23 @@ x-creator: 12345
     "password":"1234"
 }
 
+
+# PUT {{host}}/api/users
+# Content-Type: application/json
+
+# {
+#     "email":"juan1@mail.com"
+# }
+
 ###
-PUT {{host}}/api/users
+PUT http://localhost:3001/api/users/juan@mail.com
 Content-Type: application/json
+x-auth: 12345
 
 {
     "email":"juan1@mail.com"
 }
 
 ###
-DELETE {{host}}/api/users
+DELETE {{host}}/api/users/juan@mail.com
+x-auth: 12345
