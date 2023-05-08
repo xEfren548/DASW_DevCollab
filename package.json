@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/xEfren548/DASW_DevCollab#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.18.2",
     "mongoose": "^7.1.0",
     "nanoid": "^3.0.0",

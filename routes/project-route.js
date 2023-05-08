@@ -24,15 +24,15 @@ router.get('/', async(req,res) => {
 
 
 router.post('/', validarBodyProyecto, async (req, res) => {
-    let {title, description, creationDate, available} = req.body;
+    let {title, description, creationDate, available, creator} = req.body;
     //console.log(nanoid());
-    let newDoc = await Proyecto.crearProyecto({uid: nanoid(), title, description, creationDate, available});
+    let newDoc = await Proyecto.crearProyecto({uid: nanoid(), title, description, creationDate, available, creator});
     res.status(201).send(newDoc);
 })
 
 router.put('/:uid', async (req, res) => {
     let uid = req.params.uid;
-    let {title, description} = req.body;
+    let {title, description, creator} = req.body;
 
     let projectDoc = await Proyecto.getProjectByID(uid);
 
@@ -51,6 +51,9 @@ router.put('/:uid', async (req, res) => {
     }
     if(description){
         updateProject.description = description;
+    }
+    if(creator){
+        updateProject.creator = creator;
     }
 
     //projectDoc.actualizarProyecto(uid, updateProject);

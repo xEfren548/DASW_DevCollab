@@ -8,10 +8,15 @@ const projectRouter = require('./routes/project-route.js')
 const userRouter = require('./routes/users_route.js')
 const messageRouter = require ('./routes/Mensaje-route.js')
 const taskRouter = require ('./routes/task-route.js')
+const cors = require('cors');
+
 const app = express();
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json())
+app.use(cors({
+    origin: 'http://127.0.0.1:5500'
+  }));
 
 //app.use('/api/tasks', taskRouter)
 //app.use('/api/login', authRouter)

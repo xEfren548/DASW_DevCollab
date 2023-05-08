@@ -8,26 +8,28 @@ POST {{host}}/api/projects
 Content-Type: application/json
 
 {
-    "title": "test2",
+    "title": "Test 4",
     "description": "test desc",
     "creationDate": "20230505",
-    "available": "true"
+    "available": "true",
+    "creator": "test creator"
 }
 
 ###
-PUT {{host}}/api/projects/FXns2kfvY5vjKZClxVcS8
+PUT {{host}}/api/projects/eSolUbKMgrYF-jNJfKgHl
 Content-Type: application/json
 
 {
-    "description": "new description"
+  "creator": "xDev3"
+
 }
 
 ###
-PUT {{host}}/api/projects/FXns2kfvY5vjKZClxVcS8/notavailable
+PUT {{host}}/api/projects/8VvGbrIMjxzQwntwJut9V/notavailable
 Content-Type: application/json
 
 {
-    "available": "true"
+    "available": "false"
 }
 
 
@@ -36,6 +38,7 @@ DELETE {{host}}/api/projects/FXns2kfvY5vjKZClxVcS8
 
 ###
 GET {{host}}/api/users
+
 
 ###
 POST {{host}}/api/users

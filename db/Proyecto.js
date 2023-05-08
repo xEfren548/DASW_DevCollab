@@ -22,7 +22,15 @@ const projectSchema = mongoose.Schema({
         type: Boolean,
         default: true,
         required: true
+    },
+    creator: {
+        type: String,
+        required: true,
+    },
+    participants: {
+        type: Array
     }
+
 })
 
 projectSchema.statics.getProjects = async(filtros) =>{
