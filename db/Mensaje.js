@@ -34,3 +34,4 @@ messageSchema.statics.deleteMessagesByProjectId = async function (projectId) {
 const Message = mongoose.model('Message', messageSchema);
 
 module.exports = { Message };
+

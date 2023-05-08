@@ -6,6 +6,8 @@ const port = process.env.PORT || 3001;
 //const taskRouter = require('./routes/tasks-route.js');
 const projectRouter = require('./routes/project-route.js')
 const userRouter = require('./routes/users_route.js')
+const messageRouter = require ('./routes/Mensaje-route.js')
+const taskRouter = require ('./routes/task-route.js')
 const app = express();
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -15,6 +17,9 @@ app.use(express.json())
 //app.use('/api/login', authRouter)
 app.use('/api/users', userRouter);
 app.use('/api/projects', projectRouter);
+app.use('/api/messages' , messageRouter)
+app.use('/api/task' , taskRouter)
 
 
 app.listen(port, ()=> console.log("Running on port "+ port))
+

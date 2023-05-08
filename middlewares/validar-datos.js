@@ -12,7 +12,7 @@ function validarBodyProyecto(req, res, next){
 }
 function validarMensaje(req,res,next){
     let {sender, projectId, content, timestamp} = req.body;
-    if(sender&& projectId&& content&& timestamp){
+    if(sender&& projectId&& content){
         next()
         return;
     }

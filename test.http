@@ -32,7 +32,88 @@ Content-Type: application/json
 
 
 ###
-DELETE {{host}}/api/projects/1
+DELETE {{host}}/api/projects/FXns2kfvY5vjKZClxVcS8
 
 ###
 GET {{host}}/api/users
+
+###
+POST {{host}}/api/users
+Content-Type: application/json
+x-creator: 12345
+
+{
+    "username":"jose",
+    "email":"jose@mail.com",
+    "password":"1234"
+}
+
+
+# PUT {{host}}/api/users
+# Content-Type: application/json
+
+# {
+#     "email":"juan1@mail.com"
+# }
+
+###
+PUT http://localhost:3001/api/users/juan@mail.com
+Content-Type: application/json
+x-auth: 12345
+
+{
+    "email":"juan1@mail.com"
+}
+
+###
+DELETE {{host}}/api/users/juan@mail.com
+x-auth: 12345
+
+
+###
+POST {{host}}/api/messages
+Content-Type: application/json
+
+{
+"sender": "5ff2a2f5b5a5c5d5a5f5c5e5",
+"projectId": "a1",
+"content": "mensaje223"
+}
+
+###
+GET {{host}}/api/messages/a1
+
+
+###
+GET {{host}}/api/task/project-123
+
+###
+
+POST {{host}}/api/task/project-123
+Content-Type: application/json
+
+{
+  "title": "test4"
+}
+###
+POST {{host}}/api/task/project-123
+Content-Type: application/json
+
+{
+  "title": "test12"
+}
+
+###
+
+PUT {{host}}/api/task/xMmXXnnGifskQNMOjIuT1
+Content-Type: application/json
+
+{
+  "status": "In progress"
+}
+
+###
+
+DELETE {{host}}/api/task/0eQBZZnjl8WLAhvLdr4YP
+
+###
