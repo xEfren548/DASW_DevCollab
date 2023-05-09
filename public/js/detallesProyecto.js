@@ -58,3 +58,8 @@ async function detallesProyecto(uid) {
 
 detallesProyecto("kOFkZdxPbyzxF_vINs1ZA")
 
+function getUid(uid){
+
+}
+
+

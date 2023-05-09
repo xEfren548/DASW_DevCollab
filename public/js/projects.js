@@ -39,7 +39,7 @@ async function showProjects(){
                     <h4 class="card-title">${dato.title}</h4>
                     <p class="card-text">${dato.description}</p>
 
-                    <a href="public/html/details.html"><button type="button" class="btn btn-aplicar">Aplica ahora</button></a>
+                    <a><button type="button" class="btn btn-aplicar" id="btn-aplicar">Aplica ahora</button></a>
                 </div>
 
                 <div class="footer-card">
@@ -108,4 +108,13 @@ async function detallesProyecto(uid){
     const data = await getProjects(uid);
     console.log(data);
 }
+
+function redireccionAdetalles(uid){
+    location.href = "public/html/details.html";
+    console.log(`uid: ${uid}`);
+    
+}
+
+
+
 
