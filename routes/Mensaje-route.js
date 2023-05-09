@@ -1,4 +1,5 @@
 const express = require('express');
+
 const {validarMensaje} = require('../middlewares/validar-datos.js');
 
 const router = express.Router();
@@ -13,9 +14,15 @@ router.post('/',validarMensaje, async (req, res) => {
 });
 
 router.get('/:projectId', async (req, res) => {
+  try{
     const projectId = req.params.projectId;
-    const messages = await Message.find({ projectId }).populate('sender');
+    const messages = await Message.find({ projectId });
     res.send(messages);
+  }
+  catch(err){
+    console.log("error con los mensajes");
+  }
+    
 });
 
 router.delete('/:projectId', async (req, res) => {
@@ -32,6 +39,16 @@ router.delete('/:projectId', async (req, res) => {
 
 
 module.exports = router;
+
+
+
+
+
+
+
+
+
+
 
 
 
