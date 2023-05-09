@@ -59,7 +59,7 @@ async function detallesProyecto(uid) {
                     <li>${data.endDate}</li>
                 </ul>
                 <br>
-                <a name="" id="" class="btn btn-proyectos d-block" href="#" role="button">Inscribirse</a>
+                <a name="" id="" class="btn btn-proyectos d-block" href="#" role="button" >Inscribirse</a>
             </div>
         `;
     } else {
