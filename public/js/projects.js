@@ -39,7 +39,7 @@ async function showProjects(){
                     <h4 class="card-title">${dato.title}</h4>
                     <p class="card-text">${dato.description}</p>
 
-                    <a><button type="button" class="btn btn-aplicar" id="btn-aplicar">Aplica ahora</button></a>
+                    <a><button type="button" class="btn btn-aplicar" id="btn-aplicar" onclick="redireccionAdetalles('${dato.uid}')">Aplica ahora</button></a>
                 </div>
 
                 <div class="footer-card">
@@ -64,8 +64,71 @@ async function showProjects(){
             </div>
         `;
 }).join("")
-    
-}
+
+
+    // Filtrado en tiempo real
+
+    // Obtener el campo de entrada de texto y el contenedor de los proyectos
+    const searchInput = document.getElementById('search');
+    const projectsContainer = document.getElementById('cards');
+
+    // Agregar un evento 'input' al campo de entrada de texto
+    searchInput.addEventListener('input', () => {
+      const searchText = searchInput.value.toLowerCase();
+
+      // Filtrar los proyectos basado en el texto ingresado
+      const filteredProjects = data.filter(project => project.title.toLowerCase().includes(searchText));
+
+      if (filteredProjects.length === 0){
+        projectsContainer.innerHTML = '<p>No se encontraron resultados.</p>';
+
+      }else{
+        projectsContainer.innerHTML = filteredProjects.map(dato => {
+            const creationDate = dato.creationDate.toString();
+            const year = creationDate.substring(0, 4);
+            const month = creationDate.substring(4, 6);
+            const day = creationDate.substring(6, 8);
+            const formattedDate = `${day}/${month}/${year}`;
+            const availabilityClass = dato.available ? "btn-disponibilidad-si" : "btn-disponibilidad-no";
+        
+            return ` 
+            <div class="card border text-left" data-uid="${dato.uid}">
+                    <img class="card-img-top" src="holder.js/100px180/" alt="">
+                    <div class="card-body">
+                        <h4 class="card-title">${dato.title}</h4>
+                        <p class="card-text">${dato.description}</p>
+        
+                        <a><button type="button" class="btn btn-aplicar" id="btn-aplicar" onclick="redireccionAdetalles('${dato.uid}')">Aplica ahora</button></a>
+                    </div>
+        
+                    <div class="footer-card">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                <div class="icon-and-user">
+                                    <img src="public/img/avatar3.png" alt="">
+                                    <p>${dato.creator}</p>
+                                    <p>•</p>
+                                    <p>Created at: ${formattedDate}</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 text-right">
+                            <p class="${availabilityClass}">${dato.available ? 'Disponible' : 'No disponible'}</p>
+                            </div>
+        
+        
+                        </div> <!-- Cierre row-->
+        
+        
+                    </div>
+                </div>
+            `;
+        }).join("")
+        }
+      })
+
+
+
+} // fin showProjects
 
 showProjects()
 
@@ -88,19 +151,39 @@ async function sendProject(){
 
 
     
-        let newProject = {title, language, description,endDate, difficulty,creator, creationDate, available}
-    
-        let resp = await fetch('http://localhost:3001/api/projects',{
+        let newProject = {title, language, description, endDate, difficulty, creator, creationDate, available};
+
+        try {
+          let resp = await fetch('http://localhost:3001/api/projects', {
             method: 'POST',
             body: JSON.stringify(newProject),
             headers: {
-                "Content-type": "Application/json",
-            }
-        });
-        let data = await resp.json();
-    
-        console.log(resp);
-        console.log(data);
+              "Content-type": "application/json",
+            },
+          });
+        
+          if (resp.ok) {
+            // alert('El proyecto fue agregado correctamente.');
+            Swal.fire({
+                icon: 'success',
+                title: '¡ Proyecto creado !',
+                text: 'Proyecto creado correctamente!',
+              }).then(() => {
+                window.location.href = "../../index.html";
+              })
+              
+          } else {
+            throw new Error('Hubo un error al agregar el proyecto.');
+          }
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: error.message,
+              })
+              
+        }
+        
     }
 
 
@@ -110,11 +193,10 @@ async function detallesProyecto(uid){
 }
 
 function redireccionAdetalles(uid){
-    location.href = "public/html/details.html";
+    location.href = `public/html/details.html?uid=${uid}`;
     console.log(`uid: ${uid}`);
     
 }
-
 
 
 

@@ -16,6 +16,19 @@ async function getProjects(uid) {
     return data;
 }
 
+const url = window.location.href;
+// const searchParams = new URL(url).searchParams;
+// const entries = new URLSearchParams(searchParams).entries();
+
+// const res = Array.from(entries)
+// console.log(res);
+
+const params = new URLSearchParams(window.location.search);
+const globalUid = params.get('uid');
+console.log(globalUid);
+
+
+
 async function detallesProyecto(uid) {
     const data = await getProjects(uid);
     console.log(data);
@@ -56,10 +69,7 @@ async function detallesProyecto(uid) {
 }
 
 
-detallesProyecto("kOFkZdxPbyzxF_vINs1ZA")
+detallesProyecto(globalUid)
 
-function getUid(uid){
-
-}
 
 
