@@ -29,8 +29,16 @@ const projectSchema = mongoose.Schema({
     },
     participants: {
         type: Array
+    },
+    endDate:{
+        type: String,
+    },
+    difficulty: {
+        type: String
+    },
+    language:{
+        type: String
     }
-
 })
 
 projectSchema.statics.getProjects = async(filtros) =>{

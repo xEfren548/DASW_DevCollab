@@ -1,15 +1,21 @@
-async function getProjects() {
-    const response = await fetch('http://localhost:3001/api/projects', {
+async function getProjects(uid) {
+    let url = 'http://localhost:3001/api/projects';
+    
+    if (uid) {
+        url += `/${uid}`;
+    }
+    
+    const response = await fetch(url, {
         method: 'GET',
         headers: {
             'x-expediente': '732931'      
         }
     });
 
-    data = await response.json();
+    const data = await response.json();
     return data;
-    // console.log(data);
 }
+
 
 // getProjects()
 
@@ -27,11 +33,12 @@ async function showProjects(){
 
 
         return ` 
-        <div class="card border text-left">
+        <div class="card border text-left" data-uid="${dato.uid}">
                 <img class="card-img-top" src="holder.js/100px180/" alt="">
                 <div class="card-body">
                     <h4 class="card-title">${dato.title}</h4>
                     <p class="card-text">${dato.description}</p>
+
                     <a href="public/html/details.html"><button type="button" class="btn btn-aplicar">Aplica ahora</button></a>
                 </div>
 
@@ -61,3 +68,44 @@ async function showProjects(){
 }
 
 showProjects()
+
+async function sendProject(){
+        event.preventDefault();
+        let title = document.querySelector("#title").value;
+        let language = document.querySelector("#language").value;
+        let description = document.querySelector("#description").value;
+        let endDate = document.querySelector("#end_date").value;
+        let difficulty = document.querySelector("#difficulty").value;
+        let creator = "xDev1";
+        let available = true;
+
+        const date = new Date();
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // El mes está basado en cero, por eso se suma 1 y se utiliza padStart para asegurar que tenga 2 dígitos
+        const day = String(date.getDate()).padStart(2, '0'); // Utilizamos padStart para asegurar que tenga 2 dígitos
+
+        const creationDate = `${year}${month}${day}`;
+
+
+    
+        let newProject = {title, language, description,endDate, difficulty,creator, creationDate, available}
+    
+        let resp = await fetch('http://localhost:3001/api/projects',{
+            method: 'POST',
+            body: JSON.stringify(newProject),
+            headers: {
+                "Content-type": "Application/json",
+            }
+        });
+        let data = await resp.json();
+    
+        console.log(resp);
+        console.log(data);
+    }
+
+
+async function detallesProyecto(uid){
+    const data = await getProjects(uid);
+    console.log(data);
+}
+
