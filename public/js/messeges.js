@@ -77,7 +77,7 @@ async function getMessagesByProjectId(projectId) {
 
   
   getTaskbyProjectID("project-123")
-  //getMessagesByProjectId("a7");
+  getMessagesByProjectId("a7");
   
   
   
