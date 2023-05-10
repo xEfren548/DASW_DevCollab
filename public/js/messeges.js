@@ -13,7 +13,6 @@ async function getTitle(){
   
   let project = await response.json();
 
-  console.log(project);
   let title = document.getElementById('title');
   let text = `        <h3 class="text-center mb-3">${project.title} </h3>
   <p class="text-center mb-4">${project.description}</p>`
@@ -32,11 +31,7 @@ async function getMessagesByProjectId() {
   
       let htmlMessages = '';
   
-      messages.forEach(m => {
-        console.log('Messages:', m.content);
-
-
-        
+      messages.forEach(m => {        
         if(m.sender == user ){
           htmlMessages += `
           <div class="d-flex align-items-end mb-3">
@@ -77,7 +72,7 @@ async function getMessagesByProjectId() {
           todoHTML += `
             <!-- To Do tasks -->
             <li class="list-group-item d-flex justify-content-between" style="color: black;">
-              ${t.title} <button class="btn btn-primary" style="color: white;" onclick="subscribe('${t.uid}')" > Subscribe </button><button class="btn " style="color: red;" onclick="deleteTask('${t.uid}')" > delete </button>
+              ${t.title} <button class="btn btn-primary  btn-sm" style="color: white;" onclick="subscribe('${t.uid}')" > Subscribe </button><button class="btn  btn-primary btn-sm" style="color: red;" onclick="deleteTask('${t.uid}')" > delete </button>
             </li>`;
         }
 
@@ -174,10 +169,11 @@ async function getMessagesByProjectId() {
     getTaskbyProjectID(projectId_global)
   }
   async function addTask(id) {
+    console.log("addtask");
     const taskTitle = document.getElementById('taskTitle').value;
   
     try {
-      let response = await fetch(`/api/task/${id}`, {
+      let response = await fetch(`/api/task/${projectId_global}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -188,6 +184,7 @@ async function getMessagesByProjectId() {
           status: "todo",
         }),
       });
+      await console.log(response.json());
     } catch (err) {
       console.log("task not added");
     }
