@@ -5,7 +5,7 @@ const projectId_global = params.get('uid');
 console.log(projectId_global);
 
 
-let user = "xDev2"
+let user = "xDev1"
 
 async function getTitle(){
 
