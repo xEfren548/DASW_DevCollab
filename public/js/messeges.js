@@ -1,4 +1,5 @@
 let projectId_global
+let user = "xDev1"
 
 async function getMessagesByProjectId(projectId) {
   projectId_global= projectId
@@ -15,10 +16,18 @@ async function getMessagesByProjectId(projectId) {
       messages.forEach(m => {
         console.log('Messages:', m.content);
 
-        htmlMessages += `
+
+        
+        if(m.sender == user ){
+          htmlMessages += `
           <div class="d-flex align-items-end mb-3">
             <span class="badge bg-primary" style="color: white;">${m.content}</span>
           </div>`
+      }
+        
+          else {htmlMessages += `<div class="d-flex align-items-start mb-3">
+          <span class="badge bg-secondary" style="color: white;">${m.content}</span>
+        </div>`}
       });
   
       contentContainer.innerHTML = htmlMessages;
@@ -48,7 +57,7 @@ async function getMessagesByProjectId(projectId) {
               <li class="list-group-item d-flex justify-content-between" style="color: black;">
                 ${t.title} <button class="btn btn-primary btn-sm" style="color: white;" onclick"subscribe()" > Subscribe </button>
               </li>
-`
+`       
 
         }
         else if(t.status == "done"){
@@ -90,7 +99,7 @@ async function getMessagesByProjectId(projectId) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          sender: sender,
+          sender: user,
           projectId: projectId_global,
           content: content,
         }),
