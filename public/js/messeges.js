@@ -39,7 +39,7 @@ async function getMessagesByProjectId(projectId) {
 
       task.forEach(t => {
         if(t.status == "todo"){
-            completedHTML+= `   
+            todoHTML+= `   
             <!-- To Do tasks -->
               <li class="list-group-item d-flex justify-content-between" style="color: black;">
                 ${t.title} <button class="btn btn-primary btn-sm" style="color: white;"> Subscribe </button>
@@ -48,7 +48,7 @@ async function getMessagesByProjectId(projectId) {
 
         }
         else if(t.status == "done"){
-           todoHTML+= `
+           completedHTML+= `
               <li class="list-group-item d-flex justify-content-between" style="color: black;">
               ${t.title} <span class="badge bg-success" style="color: white;"> Done </span>
               </li>
