@@ -10,16 +10,17 @@ router.get("/:projectId", async (req, res) => {
 
 router.post("/:projectId", async (req, res) => {
   const { projectId } = req.params;
-  const { title } = req.body;
-  const newTask = await Task.createTask(nanoid(), projectId, title);
+  const { title, encargado } = req.body;
+  const newTask = await Task.createTask(nanoid(), projectId, title, encargado);
 
   res.status(201).send(newTask);
 });
 
 router.put("/:taskId", async (req, res) => {
   const { taskId } = req.params;
-  const { status } = req.body;
-  const updatedTask = await Task.updateTaskStatus(taskId, status);
+  const { status ,encargado } = req.body;
+console.log(encargado);
+  const updatedTask = await Task.updateTaskStatus(taskId, status, encargado);
   res.send(updatedTask);
 });
 
@@ -35,4 +36,3 @@ router.delete("/:uid", async (req, res) => {
 });
 
 module.exports = router;
-
