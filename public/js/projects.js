@@ -140,6 +140,7 @@ async function sendProject(){
         let endDate = document.querySelector("#end_date").value;
         let difficulty = document.querySelector("#difficulty").value;
         let creator = "xDev1";
+        // let creator = "Debuggito";
         let available = true;
 
         const date = new Date();
@@ -198,5 +199,8 @@ function redireccionAdetalles(uid){
     
 }
 
-
+function submitForm(event) {
+    event.preventDefault(); // Evita el envío automático del formulario
+    sendProject();
+  }
 
