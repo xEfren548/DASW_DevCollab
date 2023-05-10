@@ -85,8 +85,6 @@ async function renderProfile(){
         <h2>---------</h2>
         <h2>${user.email}</h2>
         <h2>---------</h2>
-        <h2>${user.password}</h2>
-        <h2>---------</h2>
     }
     `
 
