@@ -1,8 +1,11 @@
+
+
 const params = new URLSearchParams(window.location.search);
 const projectId_global = params.get('uid');
 console.log(projectId_global);
 
-let user = "xDev1"
+
+let user = "xDev2"
 
 async function getTitle(){
 
@@ -70,7 +73,7 @@ async function getMessagesByProjectId() {
             todoHTML+= `   
             <!-- To Do tasks -->
               <li class="list-group-item d-flex justify-content-between" style="color: black;">
-                ${t.title} <button class="btn btn-primary btn-sm" style="color: white;" onclick"= subscribe(${t.uid})" > Subscribe </button><button class="btn btn-primary btn-sm" style="color: red;" onclick"deleteTask(${t.uid})" > delete </button>
+                ${t.title} <button class="btn btn-primary" style="color: white;" onclick"= subscribe(``)" > Subscribe </button><button class="btn " style="color: red;" onclick="deleteTask(${t.uid})" > delete </button>
               </li>
 `       
 
@@ -86,7 +89,7 @@ async function getMessagesByProjectId() {
         else{
           progressHTML+=  `<!-- In Progress tasks -->
               <li class="list-group-item d-flex justify-content-between" style="color: black;">
-              ${t.title} <button class="btn btn-primary btn-sm" style="color: white;" onclick"finished(${t.uid})" > finished </button><button class="btn btn-primary btn-sm" style="color: red;" onclick"deleteTask(${t.uid})" > delete </button>
+              ${t.title} <button class="btn btn-primary btn-sm" style="color: white;" onclick= "finished(${t.uid})" > finished </button><button class="btn btn-primary btn-sm" style="color: red;" onclick="deleteTask(${t.uid})" > delete </button>
               </li>
 `
         }
@@ -163,13 +166,15 @@ async function getMessagesByProjectId() {
     let response = await fetch(`/api/task/${id}`, {
       method: 'DELETE',
     });
+    let deleted = response.json()
+    console.log(deleted);
     getTaskbyProjectID(projectId_global)
   }
-  async function addTask() {
+  async function addTask(id) {
     const taskTitle = document.getElementById('taskTitle').value;
   
     try {
-      let response = await fetch(`/api/task/${projectId_global}`, {
+      let response = await fetch(`/api/task/${id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
