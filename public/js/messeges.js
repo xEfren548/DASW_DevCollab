@@ -55,7 +55,7 @@ async function getMessagesByProjectId(projectId) {
             todoHTML+= `   
             <!-- To Do tasks -->
               <li class="list-group-item d-flex justify-content-between" style="color: black;">
-                ${t.title} <button class="btn btn-primary btn-sm" style="color: white;" onclick"subscribe(${t.uid})" > Subscribe </button>
+                ${t.title} <button class="btn btn-primary btn-sm" style="color: white;" onclick"subscribe(${t.uid})" > Subscribe </button><button class="btn btn-primary btn-sm" style="color: red;" onclick"deleteTask(${t.uid})" > delete </button>
               </li>
 `       
 
@@ -71,7 +71,7 @@ async function getMessagesByProjectId(projectId) {
         else{
           progressHTML+=  `<!-- In Progress tasks -->
               <li class="list-group-item d-flex justify-content-between" style="color: black;">
-              ${t.title} <button class="btn btn-primary btn-sm" style="color: white;" onclick"finished(${t.uid})" > finished </button>
+              ${t.title} <button class="btn btn-primary btn-sm" style="color: white;" onclick"finished(${t.uid})" > finished </button><button class="btn btn-primary btn-sm" style="color: red;" onclick"deleteTask(${t.uid})" > delete </button>
               </li>
 `
         }
@@ -136,6 +136,12 @@ async function getMessagesByProjectId(projectId) {
     });
     
   }
+  async function deleteTask(id){
+    let response = await fetch(`/api/task/${id}`, {
+      method: 'DELETE',
+    });
+  }
+  
   
   getTaskbyProjectID("project-123")
   getMessagesByProjectId("a7");
