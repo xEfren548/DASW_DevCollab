@@ -31,17 +31,20 @@ async function getMessagesByProjectId() {
   
       let htmlMessages = '';
   
-      messages.forEach(m => {        
-        if(m.sender == user ){
+      messages.forEach(m => {
+        if (m.sender == user) {
           htmlMessages += `
-          <div class="d-flex align-items-end mb-3">
+          <div class="d-flex align-items-start mb-3 flex-column">
+          <span class="small" style="color: grey;">${m.sender}</span>
             <span class="badge bg-primary" style="color: white;">${m.content}</span>
           </div>`
-      }
-        
-          else {htmlMessages += `<div class="d-flex align-items-start mb-3">
-          <span class="badge bg-secondary" style="color: white;">${m.content}</span>
-        </div>`}
+        } else {
+          htmlMessages += `
+          <div class="d-flex align-items-start mb-3 flex-column">
+          <span class="small" style="color: grey;">${m.sender}</span>
+            <span class="badge bg-secondary" style="color: white;">${m.content}</span>
+          </div>`
+        }
       });
   
       contentContainer.innerHTML = htmlMessages;
