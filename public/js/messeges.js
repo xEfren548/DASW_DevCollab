@@ -46,7 +46,7 @@ async function getMessagesByProjectId(projectId) {
             todoHTML+= `   
             <!-- To Do tasks -->
               <li class="list-group-item d-flex justify-content-between" style="color: black;">
-                ${t.title} <button class="btn btn-primary btn-sm" style="color: white;"> Subscribe </button>
+                ${t.title} <button class="btn btn-primary btn-sm" style="color: white;" onclick"subscribe()" > Subscribe </button>
               </li>
 `
 
@@ -62,7 +62,7 @@ async function getMessagesByProjectId(projectId) {
         else{
           progressHTML+=  `<!-- In Progress tasks -->
               <li class="list-group-item d-flex justify-content-between" style="color: black;">
-              ${t.title}  <span class="badge bg-warning text-dark" >In Progress</span>
+              ${t.title} <button class="btn btn-primary btn-sm" style="color: white;" onclick"finished()" > finished </button>
               </li>
 `
         }
