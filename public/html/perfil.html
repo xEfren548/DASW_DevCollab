@@ -70,35 +70,37 @@
                         <!-- <input type="file" accept=".png" class="file-input" > -->
                     </div>
                 </div>
+                <hr>
 
 
-
-                <div class="form-group mt-5">
-                  <label for="">Nombre</label>
-                  <input type="text" name="" id="" class="form-control fc-edit-profile" placeholder="Nombre" aria-describedby="helpId">
+                <div id="userData">
+                    <div class="form-group mt-5">
+                        <label for="">Nombre</label>
+                        <input type="text" name="" id="InputNombre" class="form-control fc-edit-profile" placeholder="Nombre" aria-describedby="helpId">
+                      </div>
+      
+                      <div class="form-group">
+                          <label for="">Apellido</label>
+                          <input type="text" name="" id="InputApellido" class="form-control fc-edit-profile" placeholder="Nombre" aria-describedby="helpId">
+                      </div>
+      
+                      <div class="form-group">
+                          <label for="">Email</label>
+                          <input type="text" name="" id="InputEmail" class="form-control fc-edit-profile" placeholder="Email" aria-describedby="helpId">
+                      </div>
+      
+                      <div class="form-group">
+                          <label for="">Contraseña</label>
+                          <input type="password" name="" id="InputContraseña" class="form-control fc-edit-profile" placeholder="Contraseña" aria-describedby="helpId">
+                      </div>
+      
+                      <div class="form-group">
+                          <label for="">Confirmar contraseña</label>
+                          <input type="password" name="" id="InputConfirmarContraseña" class="form-control fc-edit-profile" placeholder="Confirmar contraseña" aria-describedby="helpId">
+                      </div>
+      
+                      <input type="submit" value="Submit" class="edit-profile-btn">
                 </div>
-
-                <div class="form-group">
-                    <label for="">Apellido</label>
-                    <input type="text" name="" id="" class="form-control fc-edit-profile" placeholder="Nombre" aria-describedby="helpId">
-                </div>
-
-                <div class="form-group">
-                    <label for="">Email</label>
-                    <input type="text" name="" id="" class="form-control fc-edit-profile" placeholder="Email" aria-describedby="helpId">
-                </div>
-
-                <div class="form-group">
-                    <label for="">Contraseña</label>
-                    <input type="password" name="" id="" class="form-control fc-edit-profile" placeholder="Contraseña" aria-describedby="helpId">
-                </div>
-
-                <div class="form-group">
-                    <label for="">Confirmar contraseña</label>
-                    <input type="password" name="" id="" class="form-control fc-edit-profile" placeholder="Confirmar contraseña" aria-describedby="helpId">
-                </div>
-
-                <input type="submit" value="Submit" class="edit-profile-btn">
                 
             </div> <!--Cierre col-->
 
@@ -116,6 +118,10 @@
 
         </div> <!--Cierre row-->
     </div>
+    <script src="../js/users.js"></script>
+    <script>
+        renderProfile();
+    </script>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

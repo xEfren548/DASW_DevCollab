@@ -12,15 +12,26 @@ let userSchema =  mongoose.Schema({
         unique: true,
         required: true
     },
-    username: {
-        type: String,   
-        required: true
-    },
     password: {
         type: String,
         required: true
+    },
+    Nombres: {
+        type: String,
+        required: true
+    },
+    Apellidos: {
+        type: String,
+        required: true
     }
+    
 })
+
+userSchema.statics.getUserByEmail = async(email) =>{
+    let doc = await User.findOne({email});
+    console.log(doc);
+    return doc;
+}
 
 userSchema.statics.getUser = async(filtros)=>{
     let docs = await User.find(filtros)
@@ -37,7 +48,7 @@ userSchema.statics.getUserById= async(uid) => {
 
 //User.getUsers({},true)
 userSchema.statics.getUsers =   async (filtros={}, isAdmin=false)=>{
-    let projection = {_id:0, username:1, email:1, password:1}
+    let projection = {_id:0, email:1, password:1, Nombres:1, Apellidos:1}
     let skip=0
     let limit = 1000
     
@@ -49,7 +60,7 @@ userSchema.statics.getUsers =   async (filtros={}, isAdmin=false)=>{
 
 userSchema.statics.getUserByEmail = async (email)=>{
     let doc = await User.findOne({email},{
-        _id:0, email:1, username:1
+        _id:0, email:1, Nombres:1, Apellidos:1
     })
     console.log(doc);
     return doc

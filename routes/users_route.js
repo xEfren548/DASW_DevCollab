@@ -79,15 +79,14 @@ router.put('/:email', async(req,res)=>{
         res.status(404).send({error: 'User not found'})
         return
     }
-    
-    
-
-    let {username, password} = req.body;
+    let {username, password, Nombres, Apellidos} = req.body;
     let email = req.params.email;
     let updateUser={}
     // if(email) updateUser.email = email;
     if(username) updateUser.username = username;
     if(password) updateUser.password = password;
+    if(Nombres) updateUser.Nombres = Nombres;
+    if(Apellidos) updateUser.Apellidos = Apellidos;
 
     userDoc.update(updateUser)
         // fs.writeFileSync(path.join('data','users.json'), JSON.stringify(users))
@@ -99,11 +98,10 @@ router.put('/:email', async(req,res)=>{
 })
 
 
-router.post('/',validateCreator,async (req,res)=>{
+router.post('/',async (req,res)=>{
     //atributos username, email, password
-    let {username, email, password} = req.body;
+    let {email, password, Nombres, Apellidos} = req.body;
     let errores = []
-    if(!username) errores.push("username")
     if(!email) errores.push("email")
     if(!password) errores.push("password")
 
@@ -112,7 +110,7 @@ router.post('/',validateCreator,async (req,res)=>{
         return;
     }
 
-    let newUser = {uid: nanoid.nanoid(),username,email,password}
+    let newUser = {uid: nanoid.nanoid(),email,password, Nombres, Apellidos}
     let existeUsuario = await User.getUserByEmail(newUser.email)
 
     if(existeUsuario){

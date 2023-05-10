@@ -54,7 +54,6 @@ Content-Type: application/json
 x-creator: 12345
 
 {
-    "username":"jose",
     "email":"jose@mail.com",
     "password":"1234"
 }
