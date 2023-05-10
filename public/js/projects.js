@@ -46,7 +46,7 @@ async function showProjects(){
                     <div class="row">
                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                             <div class="icon-and-user">
-                                <img src="public/img/avatar3.png" alt="">
+                                <img src="./img/avatar3.png" alt="">
                                 <p>${dato.creator}</p>
                                 <p>•</p>
                                 <p>Created at: ${formattedDate}</p>
@@ -105,7 +105,7 @@ async function showProjects(){
                         <div class="row">
                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                                 <div class="icon-and-user">
-                                    <img src="public/img/avatar3.png" alt="">
+                                    <img src="../img/avatar3.png" alt="">
                                     <p>${dato.creator}</p>
                                     <p>•</p>
                                     <p>Created at: ${formattedDate}</p>
@@ -133,7 +133,7 @@ async function showProjects(){
 showProjects()
 
 async function sendProject(){
-        event.preventDefault();
+        // event.preventDefault();
         let title = document.querySelector("#title").value;
         let language = document.querySelector("#language").value;
         let description = document.querySelector("#description").value;
@@ -169,7 +169,7 @@ async function sendProject(){
                 title: '¡ Proyecto creado !',
                 text: 'Proyecto creado correctamente!',
               }).then(() => {
-                window.location.href = "../../index.html";
+                window.location.href = "../index.html";
               })
               
           } else {
@@ -193,7 +193,7 @@ async function detallesProyecto(uid){
 }
 
 function redireccionAdetalles(uid){
-    location.href = `public/html/details.html?uid=${uid}`;
+    location.href = `html/details.html?uid=${uid}`;
     console.log(`uid: ${uid}`);
     
 }
