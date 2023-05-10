@@ -51,8 +51,8 @@ async function showProjects() {
 
 
                 <p class="card-text">${project.description}</p>
-                <a href="agregarProyecto.html" class="edit-project">Edit</a>
-            <button class="btn btn-danger delete-project">Delete</button>
+                <a class="edit-project" onclick="redireccionAeditarProyecto('${project.uid}')">Edit</a>
+            <button class="btn btn-danger delete-project" onclick="deleteProject('${project.uid}')">Delete</button>
         </div>
     </div>
 </div>
@@ -65,28 +65,60 @@ async function showProjects() {
 
 showProjects();
 
-function deleteProject() {
-    try {
-        let url = 'http://localhost:3001/api/projects';
-
-        if (uid) {
+async function deleteProject(uid) {
+    Swal.fire({
+      title: '¿Estás seguro que quieres borrar este proyecto?',
+      text: "Esta es una acción irreversible",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Borrar'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          let url = 'http://localhost:3001/api/projects';
+  
+          if (uid) {
             url += `/${uid}`;
-        }
-
-        const response = await fetch(url, {
-            method: 'GET',
+          }
+  
+          const response = await fetch(url, {
+            method: 'DELETE',
             headers: {
-                'x-expediente': '732931'
+              'x-expediente': '732931'
             }
-        });
-
-        const data = await response.json();
-        return data;
-    }catch(err){
-        Swal.fire({
+          });
+  
+          if (response.ok) {
+            Swal.fire(
+              'Deleted!',
+              'Proyecto borrado correctamente.',
+              'success'
+            ).then(() => {
+              // Redirigir a index.html después de la confirmación exitosa
+              window.location.href = window.location.href;
+            });
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: "Hubo un error al borrar el proyecto..."
+            });
+          }
+        } catch (err) {
+          Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: error.message,
-          })
-    }
+            text: err.message
+          });
+        }
+      }
+    });
+  }
+  
+function redireccionAeditarProyecto(uid){
+    location.href = `../html/edit_project.html?uid=${uid}`;
+    console.log(`uid: ${uid}`);
+    
 }

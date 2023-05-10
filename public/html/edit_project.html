@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add project</title>
+    <title>Edit Project</title>
     <!-- <link rel="stylesheet" href="styleAddP.css"> -->
     <link rel="stylesheet" href="../css/styles.css" />
 
@@ -66,10 +66,10 @@
     <!--Cierre header-->
 
     <div class="container">
-        <h1 class="h1-add-product">Project Information</h1>
-        <form>
+        <h1 class="h1-add-product">Editar Proyecto</h1>
+        <form id="editForm" onsubmit="submitForm(event)">
             <label for="title">Title:</label>
-            <input type="text" id="title" name="title" required><br><br>
+            <input type="text" id="title" name="title" value="" required><br><br>
     
             <label for="language">Language:</label>
             <select id="language" name="language" required>
@@ -83,10 +83,10 @@
             </select><br><br>
     
             <label for="description">Description:</label><br>
-            <textarea id="description" name="description" rows="4" cols="50" required></textarea><br><br>
+            <textarea id="description" name="description" rows="4" cols="50" value="" required></textarea><br><br>
     
-            <label for="end_date">End Date:</label>
-            <input type="date" id="end_date" name="end_date" required><br><br>
+            <label for="endDate">End Date:</label>
+            <input type="date" id="endDate" name="endDate" value="" required><br><br>
     
             <label for="difficulty">Difficulty:</label>
             <select id="difficulty" name="difficulty" required>
@@ -97,13 +97,13 @@
     
             </select><br><br>
     
-            <input type="submit" value="Submit" onclick="sendProject()">
+            <input type="submit" value="Submit" >
         </form>
     </div>
     
 
     <!-- Optional JavaScript -->
-    <script src="../js/projects.js"></script>
+    <script src="../js/editProject.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
