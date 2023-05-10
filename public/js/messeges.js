@@ -149,8 +149,8 @@ async function getMessagesByProjectId() {
     
   }
   async function finished(id){
-    let response = await fetch(`/api/task/${projectId_global}`, {
-      method: 'POST',
+    let response = await fetch(`/api/task/${id}`, {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
