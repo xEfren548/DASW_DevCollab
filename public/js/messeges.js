@@ -55,7 +55,7 @@ async function getMessagesByProjectId(projectId) {
             todoHTML+= `   
             <!-- To Do tasks -->
               <li class="list-group-item d-flex justify-content-between" style="color: black;">
-                ${t.title} <button class="btn btn-primary btn-sm" style="color: white;" onclick"subscribe()" > Subscribe </button>
+                ${t.title} <button class="btn btn-primary btn-sm" style="color: white;" onclick"subscribe(${t.uid})" > Subscribe </button>
               </li>
 `       
 
@@ -71,7 +71,7 @@ async function getMessagesByProjectId(projectId) {
         else{
           progressHTML+=  `<!-- In Progress tasks -->
               <li class="list-group-item d-flex justify-content-between" style="color: black;">
-              ${t.title} <button class="btn btn-primary btn-sm" style="color: white;" onclick"finished()" > finished </button>
+              ${t.title} <button class="btn btn-primary btn-sm" style="color: white;" onclick"finished(${t.uid})" > finished </button>
               </li>
 `
         }
@@ -93,7 +93,7 @@ async function getMessagesByProjectId(projectId) {
     let content = inputMessage.value;
   
     try {
-      let response = await fetch('/api/messages', {
+      let response = await fetch(`/api/messages`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -111,8 +111,31 @@ async function getMessagesByProjectId(projectId) {
     getMessagesByProjectId(projectId_global);
 
   }
-  
 
+  async function subscribe(id){
+    let response = await fetch(`/api/task/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        status: "in-progress",
+      }),
+    });
+    
+  }
+  async function finished(id){
+    let response = await fetch(`/api/task/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        status: "done",
+      }),
+    });
+    
+  }
   
   getTaskbyProjectID("project-123")
   getMessagesByProjectId("a7");
