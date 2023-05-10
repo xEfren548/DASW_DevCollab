@@ -67,17 +67,20 @@ async function getMessagesByProjectId() {
       let completedHTML = ``
       let todoHTML = ``
       let progressHTML = ``
+      console.log("task: ",task);
+      
 
       task.forEach(t => {
-        if(t.status == "todo"){
-            todoHTML+= `   
-            <!-- To Do tasks -->
-              <li class="list-group-item d-flex justify-content-between" style="color: black;">
-                ${t.title} <button class="btn btn-primary" style="color: white;" onclick"= subscribe(``)" > Subscribe </button><button class="btn " style="color: red;" onclick="deleteTask(${t.uid})" > delete </button>
-              </li>
-`       
+// ...
 
+        if (t.status == "todo") {
+          todoHTML += `
+            <!-- To Do tasks -->
+            <li class="list-group-item d-flex justify-content-between" style="color: black;">
+              ${t.title} <button class="btn btn-primary" style="color: white;" onclick="subscribe('${t.uid}')" > Subscribe </button><button class="btn " style="color: red;" onclick="deleteTask('${t.uid}')" > delete </button>
+            </li>`;
         }
+
         else if(t.status == "done"){
            completedHTML+= `
               <li class="list-group-item d-flex justify-content-between" style="color: black;">
