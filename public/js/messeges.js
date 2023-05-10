@@ -1,11 +1,12 @@
-let projectId_global
+let projectId_global = params.get('uid');
 let user = "xDev1"
+
 
 async function getMessagesByProjectId(projectId) {
   projectId_global= projectId
 
     try {
-      const response = await fetch(`http://localhost:3001/api/messages/${projectId}`);
+      const response = await fetch(`http://localhost:3001/api/messages/${projectId_global}`);
       const messages = await response.json();
       
   
@@ -39,7 +40,7 @@ async function getMessagesByProjectId(projectId) {
 
   async function getTaskbyProjectID(projectId) {
     try {
-      const response = await fetch(`http://localhost:3001/api/task/${projectId}`);
+      const response = await fetch(`http://localhost:3001/api/task/${projectId_global}`);
       const task = await response.json();
       console.log(task);
       const completed = document.getElementById('completed');
@@ -134,12 +135,14 @@ async function getMessagesByProjectId(projectId) {
         status: "done",
       }),
     });
+    getTaskbyProjectID(projectId_global)
     
   }
   async function deleteTask(id){
     let response = await fetch(`/api/task/${id}`, {
       method: 'DELETE',
     });
+    getTaskbyProjectID(projectId_global)
   }
   
   
