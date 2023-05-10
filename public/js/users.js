@@ -11,13 +11,14 @@ async function login(){
           method: 'GET'
           
         });
-    
+        
     let users = await resp.json()
     let user = users.find(u=> u.email == email )
     console.log(user)
-
+    
     if (user){
         sessionStorage.setItem('user_email', user.email)
+        
     }
      
   
@@ -79,13 +80,13 @@ async function renderProfile(){
         profile.innerHTML = 
         `
         <h2>---------</h2>
-        <h2>${user.Nombres}</h2>
+        <h3>${user.Nombres}</h3>
         <h2>---------</h2>
-        <h2>${user.Apellidos}</h2>
+        <h3>${user.Apellidos}</h3>
         <h2>---------</h2>
-        <h2>${user.email}</h2>
+        <h3>${user.email}</h3>
         <h2>---------</h2>
-    }
+    
     `
 
 }
