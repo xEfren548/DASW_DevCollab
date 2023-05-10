@@ -67,7 +67,7 @@
 
     <div class="container">
         <h1 class="h1-add-product">Editar Proyecto</h1>
-        <form>
+        <form id="editForm" onsubmit="submitForm(event)">
             <label for="title">Title:</label>
             <input type="text" id="title" name="title" value="" required><br><br>
     
@@ -83,10 +83,10 @@
             </select><br><br>
     
             <label for="description">Description:</label><br>
-            <textarea id="description" name="description" rows="4" cols="50" required></textarea><br><br>
+            <textarea id="description" name="description" rows="4" cols="50" value="" required></textarea><br><br>
     
-            <label for="end_date">End Date:</label>
-            <input type="date" id="end_date" name="end_date" required><br><br>
+            <label for="endDate">End Date:</label>
+            <input type="date" id="endDate" name="endDate" value="" required><br><br>
     
             <label for="difficulty">Difficulty:</label>
             <select id="difficulty" name="difficulty" required>
@@ -97,7 +97,7 @@
     
             </select><br><br>
     
-            <input type="submit" value="Submit" onclick="sendProject()">
+            <input type="submit" value="Submit" >
         </form>
     </div>
     

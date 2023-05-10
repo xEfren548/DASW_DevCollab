@@ -37,7 +37,7 @@ router.post('/', validarBodyProyecto, async (req, res) => {
 
 router.put('/:uid', async (req, res) => {
     let uid = req.params.uid;
-    let {title, description, creator} = req.body;
+    let {title, description, creator, language, endDate, difficulty} = req.body;
 
     let projectDoc = await Proyecto.getProjectByID(uid);
 
@@ -59,6 +59,15 @@ router.put('/:uid', async (req, res) => {
     }
     if(creator){
         updateProject.creator = creator;
+    }
+    if(language){
+        updateProject.language = language;
+    }
+    if(endDate){
+        updateProject.endDate = endDate;
+    }
+    if(difficulty){
+        updateProject.difficulty = difficulty;
     }
 
     //projectDoc.actualizarProyecto(uid, updateProject);

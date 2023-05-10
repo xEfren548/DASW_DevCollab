@@ -25,7 +25,7 @@ async function getProjectInfo(uid){
     let title = document.getElementById('title');
     let language = document.getElementById('language');
     let description = document.getElementById('description');
-    let endDate = document.getElementById('end_date');
+    let endDate = document.getElementById('endDate');
     let difficulty = document.getElementById('difficulty');
 
     title.value = data.title;
@@ -37,3 +37,64 @@ async function getProjectInfo(uid){
 }
 
 getProjectInfo(globalUid)
+
+async function editProject(uid) {
+    let title = document.getElementById('title').value;
+    let language = document.getElementById('language').value;
+    let description = document.getElementById('description').value;
+    let endDate = document.getElementById('endDate').value;
+    let difficulty = document.getElementById('difficulty').value;
+
+    console.log(`endDate: ${endDate}`);
+
+    let editedProject = { title, language, description, endDate, difficulty };
+    console.log(editedProject);
+
+    try {
+        let resp = await fetch(`http://localhost:3001/api/projects/${uid}`, {
+            method: 'PUT',
+            body: JSON.stringify(editedProject),
+            headers: {
+                "Content-type": "application/json",
+            },
+        });
+
+        if (resp.ok) {
+            Swal.fire({
+                icon: 'success',
+                title: '¡Proyecto editado!',
+                text: 'Proyecto editado correctamente!',
+            }).then(() => {
+                window.location.href = "../html/manage_projects.html";
+            })
+
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: "Error al editar el proyecto",
+            })        }
+    } catch (error) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: error.message,
+        })
+
+    }
+}
+  
+function submitForm(event) {
+    event.preventDefault(); // Evita el envío automático del formulario
+  
+    // Obtén los valores de los campos del formulario
+    let title = document.getElementById('title').value;
+    let language = document.getElementById('language').value;
+    let description = document.getElementById('description').value;
+    let endDate = document.getElementById('endDate').value;
+    let difficulty = document.getElementById('difficulty').value;
+  
+    // Realiza el procesamiento y redirección
+    editProject(globalUid, title, language, description, endDate, difficulty);
+  }
+  
