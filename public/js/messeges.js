@@ -79,7 +79,7 @@ async function getMessagesByProjectId(projectId) {
     }
   }
 
-  function sendMessage() {
+  async function sendMessage() {
     let inputMessage = document.getElementById('inputMessage');
     let content = inputMessage.value;
   
@@ -99,8 +99,7 @@ async function getMessagesByProjectId(projectId) {
     catch(err){
       console.log("messege not sent");
     }
-  
-
+    getMessagesByProjectId(projectId_global);
 
   }
   
