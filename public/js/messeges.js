@@ -5,7 +5,7 @@ const projectId_global = params.get('uid');
 console.log(projectId_global);
 
 
-let user = "xDev1"
+let user = "xDev2"
 
 async function getTitle(){
 
@@ -87,7 +87,7 @@ async function getMessagesByProjectId() {
         else{
           progressHTML+=  `<!-- In Progress tasks -->
               <li class="list-group-item d-flex justify-content-between" style="color: black;">
-              ${t.title} <button class="btn btn-primary btn-sm" style="color: white;" onclick= "finished(${t.uid})" > finished </button><button class="btn btn-primary btn-sm" style="color: red;" onclick="deleteTask(${t.uid})" > delete </button>
+              ${t.title} <button class="btn btn-primary btn-sm" style="color: white;" onclick ="finished('${t.uid}')" > Done </button><button class="btn btn-primary btn-sm" style="color: red;" onclick="deleteTask('${t.uid}')" > delete </button>
               </li>
 `
         }
@@ -145,18 +145,22 @@ async function getMessagesByProjectId() {
         status: "in-progress",
       }),
     });
+    getTaskbyProjectID(projectId_global)
     
   }
   async function finished(id){
-    let response = await fetch(`/api/task/${id}`, {
-      method: 'PUT',
+    let response = await fetch(`/api/task/${projectId_global}`, {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
+        projectId: projectId_global,
+        title: taskTitle,
         status: "done",
       }),
     });
+    await console.log(response.json());
     getTaskbyProjectID(projectId_global)
     
   }
