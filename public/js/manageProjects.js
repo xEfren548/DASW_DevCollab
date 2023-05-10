@@ -51,6 +51,7 @@ async function showProjects() {
 
 
                 <p class="card-text">${project.description}</p>
+                <button class="btn" style="background-color: orange;" onclick="irProyecto('${project.uid}')">Ir a</button>
                 <a class="edit-project" onclick="redireccionAeditarProyecto('${project.uid}')">Edit</a>
             <button class="btn btn-danger delete-project" onclick="deleteProject('${project.uid}')">Delete</button>
         </div>
@@ -121,4 +122,8 @@ function redireccionAeditarProyecto(uid){
     location.href = `../html/edit_project.html?uid=${uid}`;
     console.log(`uid: ${uid}`);
     
+}
+function irProyecto(uid){
+  location.href = `../html/messege.html?uid=${uid}`;
+  console.log(`uid: ${uid}`);
 }

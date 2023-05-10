@@ -18,7 +18,8 @@ async function login(){
     
     if (user){
         sessionStorage.setItem('user_email', user.email)
-        
+        alert("Usuario logeado correctamente");
+
     }
      
   
