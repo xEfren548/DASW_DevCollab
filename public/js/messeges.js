@@ -1,4 +1,8 @@
+let projectId_global
+
 async function getMessagesByProjectId(projectId) {
+  projectId_global= projectId
+
     try {
       const response = await fetch(`http://localhost:3001/api/messages/${projectId}`);
       const messages = await response.json();
@@ -74,6 +78,32 @@ async function getMessagesByProjectId(projectId) {
       console.error('Error:', error);
     }
   }
+
+  function sendMessage() {
+    let inputMessage = document.getElementById('inputMessage');
+    let content = inputMessage.value;
+  
+    try {
+      let response = await fetch('/api/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          sender: sender,
+          projectId: projectId_global,
+          content: content,
+        }),
+      });
+    }
+    catch(err){
+      console.log("messege not sent");
+    }
+  
+
+
+  }
+  
 
   
   getTaskbyProjectID("project-123")
