@@ -19,7 +19,7 @@ async function login(){
     if (user){
         sessionStorage.setItem('user_email', user.email)
         alert("Usuario logeado correctamente");
-
+        
     }
      
   
@@ -80,13 +80,25 @@ async function renderProfile(){
         let profile = document.getElementById('userData');
         profile.innerHTML = 
         `
-        <h2>---------</h2>
-        <h3>${user.Nombres}</h3>
-        <h2>---------</h2>
-        <h3>${user.Apellidos}</h3>
-        <h2>---------</h2>
-        <h3>${user.email}</h3>
-        <h2>---------</h2>
+        <div class="form-group mt-5">
+                        <label for="">Nombre</label>
+                        <input type="text" name="" id="InputNombre" class="form-control fc-edit-profile" placeholder="${user.Nombres}" aria-describedby="helpId">
+                      </div>
+      
+                      <div class="form-group">
+                          <label for="">Apellido</label>
+                          <input type="text" name="" id="InputApellido" class="form-control fc-edit-profile" placeholder="${user.Apellidos}" aria-describedby="helpId">
+                      </div>
+      
+                      <div class="form-group">
+                          <label for="">Email</label>
+                          <input type="text" name="" id="InputEmail" class="form-control fc-edit-profile" placeholder="${user.email}" aria-describedby="helpId">
+                      </div>
+      
+                      <div class="form-group">
+                          <label for="">Contraseña</label>
+                          <input type="password" name="" id="InputContraseña" class="form-control fc-edit-profile" placeholder="Contraseña" aria-describedby="helpId">
+                      </div>
     
     `
 
