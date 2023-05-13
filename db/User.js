@@ -60,7 +60,7 @@ userSchema.statics.getUsers =   async (filtros={}, isAdmin=false)=>{
 
 userSchema.statics.getUserByEmail = async (email)=>{
     let doc = await User.findOne({email},{
-        _id:0, email:1, Nombres:1, Apellidos:1
+_id:0, email:1, Nombres:1, Apellidos:1, password:1
     })
     console.log(doc);
     return doc
@@ -75,17 +75,17 @@ userSchema.statics.addUser = async (newUser)=>{
 
 }
 
-userSchema.statics.updateUser = async (email, userData)=>{
-    let newUser = await User.findOneAndUpdate( {email}, {$set: userData}, {new :true})
+userSchema.statics.updateUser = async (email, userData) => {
+    let newUser = await User.findOneAndUpdate({ email }, { $set: userData }, { new: true })
     console.log(newUser);
     return newUser;
-}
-
-userSchema.methods.update = async function (userData){
+  }
+  
+  userSchema.methods.update = async function(userData) {
     let data = await this.updateOne(userData)
     console.log("update", data);
     return this
-}
+  }
 
 userSchema.statics.deleteUser = async (email)=>{
     let doc = await User.findOneAndDelete({email})

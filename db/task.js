@@ -15,6 +15,10 @@ const taskSchema = mongoose.Schema({
       type: String,
       required: true,
     },
+    encargado: {
+      type: String,
+      required: false,
+    },
     status: {
       type: String,
       enum: ["todo", "in-progress", "done"],
@@ -23,10 +27,12 @@ const taskSchema = mongoose.Schema({
   });
   
   taskSchema.statics.createTask = async function(uid, projectId, title, status = "todo") {
+    let encargado = null
     const task = new this({
       uid,
       projectId,
       title,
+      encargado,
       status,
     });
     const newTask = await task.save();
@@ -44,15 +50,17 @@ const taskSchema = mongoose.Schema({
     return task;
   };
 
-  taskSchema.statics.updateTaskStatus = async function(uid, newStatus) {
+  taskSchema.statics.updateTaskStatus = async function(uid, newStatus, Nuser) {
     const task = await this.findOne({ uid });
     if (!task) {
       throw new Error("Task not found");
     }
-      task.status = newStatus;
-      const updatedTask = await task.save();
+    task.encargado = Nuser;
+    task.status = newStatus;
+    const updatedTask = await task.save();
     return updatedTask;
   };
+  
   taskSchema.statics.deleteTask = async(uid) => {
     let t = await Task.findOneAndDelete({uid});
     console.log("Borrado");

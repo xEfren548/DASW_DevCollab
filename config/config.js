@@ -6,7 +6,7 @@ let dbConfig = {
         return `mongodb+srv://${this.user}:${this.password}@cluster0.5jyeskn.mongodb.net/${this.dbName}?retryWrites=true&w=majority
         `
     },
-    jwtSecret: '123456'
+    jwtSecret: '2222'
 }
 
 module.exports = dbConfig;

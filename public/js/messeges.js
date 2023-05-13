@@ -1,8 +1,10 @@
 
 
+
 const params = new URLSearchParams(window.location.search);
 const projectId_global = params.get('uid');
 console.log(projectId_global);
+let filter = false
 
 
 let user = "xDev2"
@@ -19,6 +21,11 @@ async function getTitle(){
   title.innerHTML = text
   getTaskbyProjectID(projectId_global)
   getMessagesByProjectId(projectId_global);
+}
+
+function noFilter(){
+  filter = false
+  getTaskbyProjectID()
 }
 
 
@@ -65,7 +72,7 @@ async function getMessagesByProjectId() {
       let completedHTML = ``
       let todoHTML = ``
       let progressHTML = ``
-      console.log("task: ",task);
+      task
       
 
       task.forEach(t => {
@@ -82,7 +89,7 @@ async function getMessagesByProjectId() {
         else if(t.status == "done"){
            completedHTML+= `
               <li class="list-group-item d-flex justify-content-between" style="color: black;">
-              ${t.title} <span class="badge bg-success" style="color: white;"> Done </span>
+              ${t.title}  <span class="badge bg-success" style="color: white;"> Finished </span><button class="btn btn-primary btn-sm" style="color: red;" onclick="deleteTask('${t.uid}')" > delete </button>
               </li>
 `
 
@@ -90,7 +97,7 @@ async function getMessagesByProjectId() {
         else{
           progressHTML+=  `<!-- In Progress tasks -->
               <li class="list-group-item d-flex justify-content-between" style="color: black;">
-              ${t.title} <button class="btn btn-primary btn-sm" style="color: white;" onclick ="finished('${t.uid}')" > Done </button><button class="btn btn-primary btn-sm" style="color: red;" onclick="deleteTask('${t.uid}')" > delete </button>
+              ${t.title} by: ${t.encargado} <button class="btn btn-primary btn-sm" style="color: white;" onclick ="finished('${t.uid}')" > Done </button><button class="btn btn-primary btn-sm" style="color: red;" onclick="deleteTask('${t.uid}')" > delete </button>
               </li>
 `
         }
@@ -127,8 +134,6 @@ async function getMessagesByProjectId() {
       });
       inputMessage.value = '';
 
-      
-      
     }
     catch(err){
       console.log("messege not sent");
@@ -138,19 +143,31 @@ async function getMessagesByProjectId() {
 
   }
 
-  async function subscribe(id){
+  async function subscribe(id) {
     let response = await fetch(`/api/task/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
+  
       body: JSON.stringify({
+        uid: id,
         status: "in-progress",
+        encargado: user
       }),
     });
-    getTaskbyProjectID(projectId_global)
+    if(filter){
+      filteredTask()
+
+    }
+    else{
+      getTaskbyProjectID();
+
+    }
+  
     
   }
+  
   async function finished(id){
     let response = await fetch(`/api/task/${id}`, {
       method: 'PUT',
@@ -164,7 +181,14 @@ async function getMessagesByProjectId() {
       }),
     });
     await console.log(response.json());
-    getTaskbyProjectID(projectId_global)
+    if(filter){
+      filteredTask()
+
+    }
+    else{
+      getTaskbyProjectID();
+
+    }
     
   }
   async function deleteTask(id){
@@ -173,7 +197,14 @@ async function getMessagesByProjectId() {
     });
     let deleted = response.json()
     console.log(deleted);
-    getTaskbyProjectID(projectId_global)
+    if(filter){
+      filteredTask()
+
+    }
+    else{
+      getTaskbyProjectID();
+
+    }
   }
   async function addTask(id) {
     console.log("addtask");
@@ -196,10 +227,57 @@ async function getMessagesByProjectId() {
       console.log("task not added");
     }
   
-    getTaskbyProjectID(projectId_global);
+    if(filter){
+      filteredTask()
+
+    }
+    else{
+      getTaskbyProjectID();
+
+    }
     $('#addTaskModal').modal('hide');
     document.getElementById('taskTitle').value = '';
   }
+
+  async function filteredTask() {
+    task = true
+    try {
+      const response = await fetch(`http://localhost:3001/api/task/${projectId_global}`);
+      const Alltask = await response.json();
+      const completed = document.getElementById('completed');
+      const todo = document.getElementById('todo');
+      const progress = document.getElementById('progress');
+
+      let completedHTML = ``
+      let todoHTML = ``
+      let progressHTML = ``
+      const condition = (t) => t.encargado == user; // Check if the number is even
+
+      let task = Alltask.filter(condition)
+      
+
+      task.forEach(t => {
+// ...
+
+        if (t.status == "in-progress") {
+          progressHTML+=  `<!-- In Progress tasks -->
+              <li class="list-group-item d-flex justify-content-between" style="color: black;">
+              ${t.title} by: ${t.encargado} <button class="btn btn-primary btn-sm" style="color: white;" onclick ="finished('${t.uid}')" > Done </button><button class="btn btn-primary btn-sm" style="color: red;" onclick="deleteTask('${t.uid}')" > delete </button>
+              </li>
+`
+        }
+       
+        
+      });
+
+      progress.innerHTML = progressHTML;
+
+
+    }catch (error) {
+      console.error('Error:', error);
+    }
+  }
+
   
   
   getTitle();
