@@ -2,6 +2,8 @@
 // const {User} = require('../db/Users.js');
 
 
+
+
 async function login(){
     let email = document.getElementById("inputEmail-l").value;
     let password = document.getElementById("inputPassword-l").value;   
@@ -9,7 +11,7 @@ async function login(){
       
         let resp = await fetch('/api/users', {
           method: 'GET'
-          
+          //TOKEN 
         });
         
     let users = await resp.json()
@@ -17,6 +19,8 @@ async function login(){
     console.log(user)
     
     if (user){
+        const token = jwt.sign({ email: user.email }, 'clave-secreta');
+        sessionStorage.setItem('token', token);
         sessionStorage.setItem('user_email', user.email)
         alert("Usuario logeado correctamente");
         
@@ -70,9 +74,10 @@ if (password == confirmedPass) {
 }
 
 async function renderProfile(){
-    let email = sessionStorage.getItem('user_email');
-    if (email){
-        let resp = await fetch('/api/users/'+email, {
+    //let email = sessionStorage.getItem('user_email');
+    //sessionStorage('user','token)
+        let token = sessionStorage.getItem('user_token')
+        let resp = await fetch('/api/users/ds1@mail.com', {
             method: 'GET'
           });
         
@@ -82,36 +87,54 @@ async function renderProfile(){
         `
         <div class="form-group mt-5">
                         <label for="">Nombre</label>
-                        <input type="text" name="" id="InputNombre" class="form-control fc-edit-profile" placeholder="${user.Nombres}" aria-describedby="helpId">
+                        <input type="text" name="" id="InputNombre" class="form-control fc-edit-profile" value="${user.Nombres}" aria-describedby="helpId required">
                       </div>
       
                       <div class="form-group">
                           <label for="">Apellido</label>
-                          <input type="text" name="" id="InputApellido" class="form-control fc-edit-profile" placeholder="${user.Apellidos}" aria-describedby="helpId">
+                          <input type="text" name="" id="InputApellido" class="form-control fc-edit-profile" value="${user.Apellidos}" aria-describedby="helpId" required>
                       </div>
       
                       <div class="form-group">
                           <label for="">Email</label>
-                          <input type="text" name="" id="InputEmail" class="form-control fc-edit-profile" placeholder="${user.email}" aria-describedby="helpId">
+                          <input type="text" name="" id="InputEmail" class="form-control fc-edit-profile" value="${user.email}" aria-describedby="helpId" required>
                       </div>
       
                       <div class="form-group">
                           <label for="">Contraseña</label>
-                          <input type="password" name="" id="InputContraseña" class="form-control fc-edit-profile" placeholder="Contraseña" aria-describedby="helpId">
+                          <input type="password" name="" id="InputContraseña" class="form-control fc-edit-profile" value="${user.password}" aria-describedby="helpId" required>
                       </div>
+
+                      <button type="submit"  onclick="editarUsuario('${user.email}')" value="Submit" class="form-control fc-edit-profile" > Submit</button>
     
     `
 
 }
   
-function borrarLogin(){
-    let login = document.getElementById('Login')
-    let logeado = sessionStorage.getItem('user_email')
-    if (logeado){
-        login.innerHTML = ''
-    }
-}}
+// En la función editarUsuario
+async function editarUsuario(id) {
+  const email = document.getElementById("InputEmail").value;
+  let token = sessionStorage.getItem('user_token');
 
+  let response = await fetch('/api/users/' + id, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json'},
+    body: JSON.stringify({"email":email})
+  });
+
+  const usuarioActualizado = await response.json();
+  console.log('Usuario actualizado:', usuarioActualizado);
+  alert('Cambio realizado exitosamente');
+  return usuarioActualizado;
+}
+
+function borrarLogin(){
+  let login = document.getElementById('Login')
+  let logeado = sessionStorage.getItem('user_email')
+  if (logeado){
+      login.innerHTML = ''
+  }
+}
 
 // async function getUser() {
 //     const response = await fetch('http://localhost:3001/api/users', {
@@ -177,4 +200,3 @@ function borrarLogin(){
 //  loadUsers()
 
 // module.exports = router;
-  
