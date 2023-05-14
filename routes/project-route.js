@@ -115,6 +115,22 @@ router.put('/:uid/notavailable', async(req,res) => {
 
     //setProyectStatus
 })
+router.put('/:uid/participants', async (req, res) => {
+    let uid = req.params.uid;
+    let participant = req.body.participant;
+
+    let projectDoc = await Proyecto.getProjectByID(uid);
+
+    if(!projectDoc) {
+        res.status(404).send({error: "Project not found"});
+        return;
+    }
+    console.log(participant);
+
+    let updatedProject = await Proyecto.addParticipant(uid, participant);
+
+    res.send(updatedProject);
+});
 
 
 module.exports = router;

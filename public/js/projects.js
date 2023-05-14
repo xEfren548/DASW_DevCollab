@@ -1,5 +1,4 @@
-let user = sessionStorage.getItem('user_email')
-console.log(user);
+let userEmail = sessionStorage.getItem('user_email')
 
 
 async function getProjects(uid) {
@@ -143,7 +142,8 @@ async function sendProject(){
         let description = document.querySelector("#description").value;
         let endDate = document.querySelector("#end_date").value;
         let difficulty = document.querySelector("#difficulty").value;
-        let creator = user;
+        let creator = userEmail;
+        console.log(creator);
         // let creator = "Debuggito";
         let available = true;
 
