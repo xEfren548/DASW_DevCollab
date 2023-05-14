@@ -78,56 +78,60 @@ if (password == confirmedPass) {
 }
 
 async function renderProfile(){
-        let token = sessionStorage.getItem('user_token')
-        let resp = await fetch('/api/users/ds1@mail.com', {
-            method: 'GET'
-          });
-        
-        let user = await resp.json()
-        let profile = document.getElementById('userData');
-        profile.innerHTML = 
-        `
-        <div class="form-group mt-5">
-                        <label for="">Nombre</label>
-                        <input type="text" name="" id="InputNombre" class="form-control fc-edit-profile" value="${user.Nombres}" aria-describedby="helpId required">
-                      </div>
-      
-                      <div class="form-group">
-                          <label for="">Apellido</label>
-                          <input type="text" name="" id="InputApellido" class="form-control fc-edit-profile" value="${user.Apellidos}" aria-describedby="helpId" required>
-                      </div>
-      
-                      <div class="form-group">
-                          <label for="">Email</label>
-                          <input type="text" name="" id="InputEmail" class="form-control fc-edit-profile" value="${user.email}" aria-describedby="helpId" required>
-                      </div>
-      
-                      <div class="form-group">
-                          <label for="">Contraseña</label>
-                          <input type="password" name="" id="InputContraseña" class="form-control fc-edit-profile" value="${user.password}" aria-describedby="helpId" required>
-                      </div>
+  let token = sessionStorage.getItem('user_token')
+  let email = sessionStorage.getItem('user_email')
+  let resp = await fetch(`/api/users/${email}`, {
+      method: 'GET'
+    });
+  
+  let user = await resp.json()
+  console.log("here",user);
+  let profile = document.getElementById('userData');
+  profile.innerHTML = 
+  `
+  <div class="form-group mt-5">
+                  <label for="">Nombre</label>
+                  <input type="text" name="" id="InputNombre" class="form-control fc-edit-profile" value="${user.Nombres}" aria-describedby="helpId required">
+                </div>
 
-                      <button type="submit"  onclick="editarUsuario('${user.email}')" value="Submit" class="form-control fc-edit-profile" > Submit</button>
-    
-    `
+                <div class="form-group">
+                    <label for="">Apellido</label>
+                    <input type="text" name="" id="InputApellido" class="form-control fc-edit-profile" value="${user.Apellidos}" aria-describedby="helpId" required>
+                </div>
+
+                <div class="form-group">
+                <label for="">Email</label>
+                <input type="text" name="" id="InputEmail" class="form-control fc-edit-profile" value="${user.email}" aria-describedby="helpId" required>
+            </div>
+
+
+                <button type="submit"  onclick="editarUsuario('${user.email}')" value="Submit" class="form-control fc-edit-profile" > Submit</button>
+
+`
 
 }
   
 // En la función editarUsuario
 async function editarUsuario(id) {
   const email = document.getElementById("InputEmail").value;
+  const fName = document.getElementById("InputNombre").value;
+  const lName = document.getElementById("InputApellido").value;
   let token = sessionStorage.getItem('user_token');
 
   let response = await fetch('/api/users/' + id, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json'},
-    body: JSON.stringify({"email":email})
+    body: JSON.stringify({"email":email,"password":null,"Nombre":fName,"Apellidos":lName, })
   });
+  if(email){
+    sessionStorage.setItem('user_email', email)
+  }
 
   const usuarioActualizado = await response.json();
   console.log('Usuario actualizado:', usuarioActualizado);
   alert('Cambio realizado exitosamente');
   return usuarioActualizado;
+
 }
 
 function borrarLogin(){
@@ -137,3 +141,4 @@ function borrarLogin(){
       login.innerHTML = ''
   }
 }
+renderProfile()
