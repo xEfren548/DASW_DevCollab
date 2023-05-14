@@ -1,3 +1,5 @@
+let user = sessionStorage.getItem('user_email')
+
 async function getProjects(uid) {
     let url = 'http://localhost:3001/api/projects';
     
@@ -30,6 +32,7 @@ console.log(globalUid);
 
 
 async function detallesProyecto(uid) {
+
     const data = await getProjects(uid);
     console.log(data);
     const rowDetalles = document.getElementById('rowDetalles');
@@ -59,7 +62,7 @@ async function detallesProyecto(uid) {
                     <li>${data.endDate}</li>
                 </ul>
                 <br>
-                <a name="" id="" class="btn btn-proyectos d-block" href="#" role="button" >Inscribirse</a>
+                <a name="" id="" class="btn btn-proyectos d-block" href="#" onclick= "inscribir()" role="button" >Inscribirse</a>
             </div>
         `;
     } else {
@@ -68,8 +71,43 @@ async function detallesProyecto(uid) {
     }
 }
 
+async function inscribir(){
+   if(user) {try {
+        let response = await fetch(`http://localhost:3001/api/projects/${globalUid}/participants`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ participant: user })
+        })
+        
+        if (response.ok) {
+            Swal.fire({
+                icon: 'success',
+                title: '¡ Fue Inscrito !',
+                text: '',
+              }).then(() => {
+                window.location.href = "../index.html";
+              })
+              
+          } else {
+            throw new Error('Hubo un error al agregar el inscribirlo.');
+          }
+    } catch (error) {
+        console.log('There was a problem with the fetch operation: ' + error.message);
+    }
+}
+else {
+    Swal.fire({
+        icon: 'error',
+        title: '¡ No se ha registrado !',
+        text: 'Cree una cuenta para poder inscribirse',
+      }).then(() => {
+        window.location.href = "../index.html";
+      })
+      
+  }
+
+}
 
 detallesProyecto(globalUid)
-
-
-
