@@ -1,3 +1,7 @@
+let user = sessionStorage.getItem('user_email')
+console.log(user);
+
+
 async function getProjects(uid) {
     let url = 'http://localhost:3001/api/projects';
     
@@ -139,7 +143,7 @@ async function sendProject(){
         let description = document.querySelector("#description").value;
         let endDate = document.querySelector("#end_date").value;
         let difficulty = document.querySelector("#difficulty").value;
-        let creator = "xDev1";
+        let creator = user;
         // let creator = "Debuggito";
         let available = true;
 

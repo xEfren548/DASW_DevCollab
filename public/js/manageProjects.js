@@ -11,6 +11,10 @@
         </div>
     </div>
 </div> */}
+let user = sessionStorage.getItem('user_email')
+console.log(user);
+
+
 async function getProjects(uid) {
     let url = 'http://localhost:3001/api/projects';
 
