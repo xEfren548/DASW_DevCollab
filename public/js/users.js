@@ -1,48 +1,14 @@
-//const router  = require('express').Router();
-// const {User} = require('../db/Users.js');
-
-
-
-/*
-async function login(){
-    let email = document.getElementById("inputEmail-l").value;
-    let password = document.getElementById("inputPassword-l").value;   
-
-      
-        let resp = await fetch('/api/users', {
-          method: 'GET'
-        });
-        
-    let users = await resp.json()
-    let user = users.find(u=> u.email == email )
-    console.log(user)
-    
-    if (user){
-        //const token = jwt.sign({ email: user.email }, 'clave-secreta');
-        //sessionStorage.setItem('token', token);
-        sessionStorage.setItem('user_email', user.email)
-        sessionStorage.setItem('user_name', user.Nombres)
-        alert("Usuario logeado correctamente");
-        
-    }
-     
-  
-}
-*/
 
 async function login() {
-  // Get input values
   let email = document.getElementById("inputEmail-l").value;
   let password = document.getElementById("inputPassword-l").value;
 
-  // Construct request body
   let user = {
       email: email,
       password: password
   };
   console.log(user);
 
-  // Send a POST request to the login route
   let response = await fetch('/api/login', {
       method: 'POST',
       headers: {
@@ -51,20 +17,17 @@ async function login() {
       body: JSON.stringify(user)
   });
 
-  // Check if login is successful
   if (response.ok) {
       let responseBody = await response.json();
       let token = responseBody.token;
 
-      // Save the token to sessionStorage
       sessionStorage.setItem('user_token', token);
+      sessionStorage.setItem('user_email', user.email)
       alert("Usuario logeado correctamente");
   } else {
-      // Handle error
       let error = await response.json();
       alert("Error: " + error.error);
   }
-  sessionStorage.setItem('jwtToken', token);
 }
 
 
