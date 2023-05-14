@@ -1,9 +1,9 @@
-// const router  = require('express').Router();
+//const router  = require('express').Router();
 // const {User} = require('../db/Users.js');
 
 
 
-
+/*
 async function login(){
     let email = document.getElementById("inputEmail-l").value;
     let password = document.getElementById("inputPassword-l").value;   
@@ -11,7 +11,6 @@ async function login(){
       
         let resp = await fetch('/api/users', {
           method: 'GET'
-          //TOKEN 
         });
         
     let users = await resp.json()
@@ -19,15 +18,57 @@ async function login(){
     console.log(user)
     
     if (user){
-        const token = jwt.sign({ email: user.email }, 'clave-secreta');
-        sessionStorage.setItem('token', token);
+        //const token = jwt.sign({ email: user.email }, 'clave-secreta');
+        //sessionStorage.setItem('token', token);
         sessionStorage.setItem('user_email', user.email)
+        sessionStorage.setItem('user_name', user.Nombres)
         alert("Usuario logeado correctamente");
         
     }
      
   
 }
+*/
+
+async function login() {
+  // Get input values
+  let email = document.getElementById("inputEmail-l").value;
+  let password = document.getElementById("inputPassword-l").value;
+
+  // Construct request body
+  let user = {
+      email: email,
+      password: password
+  };
+  console.log(user);
+
+  // Send a POST request to the login route
+  let response = await fetch('/api/login', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user)
+  });
+
+  // Check if login is successful
+  if (response.ok) {
+      let responseBody = await response.json();
+      let token = responseBody.token;
+
+      // Save the token to sessionStorage
+      sessionStorage.setItem('user_token', token);
+      alert("Usuario logeado correctamente");
+  } else {
+      // Handle error
+      let error = await response.json();
+      alert("Error: " + error.error);
+  }
+  sessionStorage.setItem('jwtToken', token);
+}
+
+
+
 
   async function Registro() {
 
@@ -135,68 +176,3 @@ function borrarLogin(){
       login.innerHTML = ''
   }
 }
-
-// async function getUser() {
-//     const response = await fetch('http://localhost:3001/api/users', {
-//         method: 'GET',
-//         headers: {
-//             'x-expediente': '12345'      
-//         }
-//     });
-
-//     data = await response.json();
-//     return data;
-//     // console.log(data);
-// }
-
-
-// //login
-// router.postUser('/', async (req, res)=>{
-//     console.log(req.body);
-//     let user = await User.getUserByEmail(req.body.email);
-//     if(! user){
-//         res.status(401).send({error: "Usuario no existente"})
-//         return;
-//     }
-   
-//     console.log("user");
-//     console.log(user);
-
-//     //TODO: comparar usando bcrypt
-//     if(user.password != req.body.password){
-//         res.status(401).send({error: "usuario o contraseña inválidos"})
-//         return;
-//     }
-
-//     let token = jwt.sign({email: user.email},
-//                          config.jwtSecret,
-//                          { expiresIn: 60 * 3 },)
-
-//     res.send({token})
-// })
-
-// //Cargar usuario
-// async function loadUsers(){
-//     let response = await fetch("api/users",{
-//      method: "GET"
-//     })
-//     console.log(response.status);
-//     users = await response.json()
-//     console.log(users);
-//     let listaUsers = document.getUserByEmail("login")
-//     listaUsers.innerHTML = users.map(usr=>` 
-//     <div class="border">
-//      <p>id: ${usr.id}</p>
-//      <p>Username: ${usr.username}</p>
-//      <p>email: ${usr.email}</p>
-//      ${usr.password? `<p>password: ${usr.password} </p>`:""}
-//      <button type="button" class="btn btn-primary" onclick="deleteUser('${usr.id}')" > <i class="fas fa-trash    "></i></button>
-//      <button type="button" class="btn btn-primary" onclick="editarUser('${usr.id}')" > <i class="fas fa-edit    "></i></button>
-//     </div>
-//     `).join("")
-//    //  listaUsers.innerText = JSON.stringify(users);
-//  }
-
-//  loadUsers()
-
-// module.exports = router;
