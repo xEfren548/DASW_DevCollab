@@ -134,9 +134,6 @@ router.post('/',async (req,res)=>{
     }
     console.log(newUser);
 
-    //TOKEN
-    let token = jwt.sign({email: newUser.email}, config.jwtSecret)
-    res.send({token})
 
     let newDoc = await User.addUser(newUser);
     res.status(201).send(newDoc)

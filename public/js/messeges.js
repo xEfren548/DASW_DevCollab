@@ -282,6 +282,7 @@ async function getMessagesByProjectId() {
   
   
   getTitle();
+  getMessagesByProjectId()
   
   
   
