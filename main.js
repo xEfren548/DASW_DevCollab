@@ -9,6 +9,8 @@ const userRouter = require('./routes/users_route.js')
 const messageRouter = require ('./routes/Mensaje-route.js')
 const taskRouter = require ('./routes/task-route.js')
 const cors = require('cors');
+const authRouter = require('./routes/auth-route.js')
+
 
 const app = express();
 
@@ -19,11 +21,12 @@ app.use(cors({
   }));
 
 //app.use('/api/tasks', taskRouter)
-//app.use('/api/login', authRouter)
+app.use('/api/login', authRouter)
 app.use('/api/users', userRouter);
 app.use('/api/projects', projectRouter);
 app.use('/api/messages' , messageRouter)
 app.use('/api/task' , taskRouter)
+
 
 
 app.listen(port, ()=> console.log("Running on port "+ port))
