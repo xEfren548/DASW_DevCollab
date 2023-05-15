@@ -77,7 +77,8 @@ async function renderProfile(){
     //let email = sessionStorage.getItem('user_email');
     //sessionStorage('user','token)
         let token = sessionStorage.getItem('user_token')
-        let resp = await fetch('/api/users/ds1@mail.com', {
+        console.log("token: " + token);
+        let resp = await fetch('/api/users/tessst1@gmail.com', {
             method: 'GET'
           });
         

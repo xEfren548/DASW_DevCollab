@@ -5,10 +5,11 @@ const {User} = require('../db/User.js')
 const nanoid = require('nanoid');
 const fs = require('fs');
 const path = require('path')
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+
 const config = require('../config/config.js');
 
-console.log(nanoid.nanoid());
+// console.log(nanoid.nanoid());
 
 //con archivo users.json
 // router.get('/',validateAdmin, (req,res)=>{
