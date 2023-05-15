@@ -11,6 +11,10 @@
         </div>
     </div>
 </div> */}
+let user = sessionStorage.getItem('user_email')
+console.log(user);
+
+
 async function getProjects(uid) {
     let url = 'http://localhost:3001/api/projects';
 
@@ -29,15 +33,22 @@ async function getProjects(uid) {
     return data;
 }
 
-function getProjectsByCreator(projects, creator) {
-    return projects.filter(project => project.creator === creator);
+function getProjectsByCreator(projects, user) {
+    return projects.filter(project => project.creator === user);
 }
+function getProjectsByParticipant(projects, user) {
+  console.log(projects);
+  return projects.filter(project => project.participants.includes(user));
+}
+
+
 
 async function showProjects() {
     const data = await getProjects();
 
     // Filtrar proyectos por creador
-    const filteredProjects = getProjectsByCreator(data, 'xDev1');
+    let filteredProjects = getProjectsByCreator(data, user);
+
     console.log(filteredProjects);
     const manageRow = document.getElementById('manageRow');
 
@@ -60,6 +71,26 @@ async function showProjects() {
         
 `
     }).join("")
+    let collabP = getProjectsByParticipant(data, user);
+    const otherP = document.getElementById('otherP');
+    otherP.innerHTML = collabP.map(project => {
+      return `
+      <div class="col-6">
+          <div class="card">
+              <div class="card-body">
+              <h5 class="card-title">${project.title}</h5>
+              <p>Encargado : ${project.creator} </p>
+
+
+              <p class="card-text">${project.description}</p>
+              <button class="btn" style="background-color: orange;" onclick="irProyecto('${project.uid}')">Ir a</button>
+
+      </div>
+  </div>
+</div>
+      
+`
+  }).join("")
 
 
 }

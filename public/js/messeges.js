@@ -7,7 +7,8 @@ console.log(projectId_global);
 let filter = false
 
 
-let user = "xDev2"
+let user = sessionStorage.getItem('user_email')
+console.log(user);
 
 async function getTitle(){
 
@@ -281,6 +282,7 @@ async function getMessagesByProjectId() {
   
   
   getTitle();
+  getMessagesByProjectId()
   
   
   

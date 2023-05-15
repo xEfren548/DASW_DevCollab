@@ -97,14 +97,17 @@ router.get('/:test', (req, res) => {
 // })
 
 router.put('/:email', async (req, res) => {
-    let { username,email, password, Nombres, Apellidos } = req.body;
+    let { username,email, password, n, Apellidos } = req.body;
+    console.log("body:", req.body);
     
     let updateUser = {};
     if (username) updateUser.username = username;
     if (email) updateUser.email = email;
     if (password) updateUser.password = password;
-    if (Nombres) updateUser.Nombres = Nombres;
+    if (n) updateUser.Nombres = n;
     if (Apellidos) updateUser.Apellidos = Apellidos;
+
+    console.log(updateUser);
   
     let changedUser = await User.updateUser(req.params.email, updateUser);
     res.send(changedUser);
@@ -132,9 +135,6 @@ router.post('/',async (req,res)=>{
     }
     console.log(newUser);
 
-    //TOKEN
-    let token = jwt.sign({email: newUser.email}, config.jwtSecret)
-    res.send({token})
 
     let newDoc = await User.addUser(newUser);
     res.status(201).send(newDoc)

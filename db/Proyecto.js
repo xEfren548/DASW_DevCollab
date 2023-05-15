@@ -72,6 +72,17 @@ projectSchema.statics.borrarProyecto = async(uid) => {
     return doc;
 }
 
+projectSchema.statics.addParticipant = async(uid, participant) => {
+    let updatedProject = await Proyecto.findOneAndUpdate(
+        {uid}, 
+        {$push: {participants: participant}}, 
+        {new: true}
+    );
+    console.log(participant);
+    return updatedProject;
+}
+
+
 
 const Proyecto = mongoose.model('Proyecto', projectSchema );
 
