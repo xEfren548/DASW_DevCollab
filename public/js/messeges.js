@@ -12,7 +12,7 @@ console.log(user);
 
 async function getTitle(){
 
-  let response = await fetch(`http://localhost:3001/api/projects/${projectId_global}`)
+  let response = await fetch(`https://dasw-devcollab-11mh.onrender.com/api/projects/${projectId_global}`)
   
   let project = await response.json();
 
@@ -33,7 +33,7 @@ function noFilter(){
 async function getMessagesByProjectId() {
 
     try {
-      const response = await fetch(`http://localhost:3001/api/messages/${projectId_global}`);
+      const response = await fetch(`https://dasw-devcollab-11mh.onrender.com/api/messages/${projectId_global}`);
       const messages = await response.json();
       const contentContainer = document.getElementById('messegesHere');
   
@@ -64,7 +64,7 @@ async function getMessagesByProjectId() {
 
   async function getTaskbyProjectID() {
     try {
-      const response = await fetch(`http://localhost:3001/api/task/${projectId_global}`);
+      const response = await fetch(`https://dasw-devcollab-11mh.onrender.com/api/task/${projectId_global}`);
       const task = await response.json();
       const completed = document.getElementById('completed');
       const todo = document.getElementById('todo');
@@ -122,7 +122,7 @@ async function getMessagesByProjectId() {
     
   
     try {
-      let response = await fetch(`/api/messages`, {
+      let response = await fetch(`https://dasw-devcollab-11mh.onrender.com/api/messages`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -145,7 +145,7 @@ async function getMessagesByProjectId() {
   }
 
   async function subscribe(id) {
-    let response = await fetch(`/api/task/${id}`, {
+    let response = await fetch(`https://dasw-devcollab-11mh.onrender.com/api/task/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -170,7 +170,7 @@ async function getMessagesByProjectId() {
   }
   
   async function finished(id){
-    let response = await fetch(`/api/task/${id}`, {
+    let response = await fetch(`https://dasw-devcollab-11mh.onrender.com/api/task/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -193,7 +193,7 @@ async function getMessagesByProjectId() {
     
   }
   async function deleteTask(id){
-    let response = await fetch(`/api/task/${id}`, {
+    let response = await fetch(`https://dasw-devcollab-11mh.onrender.com/api/task/${id}`, {
       method: 'DELETE',
     });
     let deleted = response.json()
@@ -243,7 +243,7 @@ async function getMessagesByProjectId() {
   async function filteredTask() {
     task = true
     try {
-      const response = await fetch(`http://localhost:3001/api/task/${projectId_global}`);
+      const response = await fetch(`https://dasw-devcollab-11mh.onrender.com/api/task/${projectId_global}`);
       const Alltask = await response.json();
       const completed = document.getElementById('completed');
       const todo = document.getElementById('todo');

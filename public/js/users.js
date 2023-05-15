@@ -9,7 +9,7 @@ async function login() {
   };
   console.log(user);
 
-  let response = await fetch('/api/login', {
+  let response = await fetch('https://dasw-devcollab-11mh.onrender.com/api/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -82,7 +82,7 @@ async function renderProfile() {
   //sessionStorage('user','token)
   let token = sessionStorage.getItem('user_token')
   console.log("token: " + token);
-  let resp = await fetch('/api/users/tessst1@gmail.com', {
+  let resp = await fetch('https://dasw-devcollab-11mh.onrender.com/api/users/tessst1@gmail.com', {
     method: 'GET'
   });
 
@@ -150,7 +150,7 @@ async function editarUsuario(id) {
   const lName = document.getElementById("InputApellido").value;
   let token = sessionStorage.getItem('user_token');
 
-  let response = await fetch('/api/users/' + id, {
+  let response = await fetch('https://dasw-devcollab-11mh.onrender.com/api/users/' + id, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ "email": email, "password": null, "Nombre": fName, "Apellidos": lName, })

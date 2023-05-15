@@ -3,7 +3,7 @@ const globalUid = params.get('uid');
 console.log(globalUid);
 
 async function getProjects(uid) {
-    let url = 'http://localhost:3001/api/projects';
+    let url = 'https://dasw-devcollab-11mh.onrender.com/api/projects';
     
     if (uid) {
         url += `/${uid}`;
@@ -51,7 +51,7 @@ async function editProject(uid) {
     console.log(editedProject);
 
     try {
-        let resp = await fetch(`http://localhost:3001/api/projects/${uid}`, {
+        let resp = await fetch(`https://dasw-devcollab-11mh.onrender.com/api/projects/${uid}`, {
             method: 'PUT',
             body: JSON.stringify(editedProject),
             headers: {

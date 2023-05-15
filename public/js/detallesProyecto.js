@@ -1,7 +1,7 @@
 let user = sessionStorage.getItem('user_email')
 
 async function getProjects(uid) {
-    let url = 'http://localhost:3001/api/projects';
+    let url = 'https://dasw-devcollab-11mh.onrender.com/api/projects';
     
     if (uid) {
         url += `/${uid}`;
@@ -73,7 +73,7 @@ async function detallesProyecto(uid) {
 
 async function inscribir(){
    if(user) {try {
-        let response = await fetch(`http://localhost:3001/api/projects/${globalUid}/participants`, {
+        let response = await fetch(`https://dasw-devcollab-11mh.onrender.com/api/projects/${globalUid}/participants`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
