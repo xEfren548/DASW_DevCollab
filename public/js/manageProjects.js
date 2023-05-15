@@ -16,7 +16,7 @@ console.log(user);
 
 
 async function getProjects(uid) {
-    let url = 'http://localhost:3001/api/projects';
+    let url = 'https://dasw-devcollab-11mh.onrender.com/api/projects';
 
     if (uid) {
         url += `/${uid}`;
@@ -109,7 +109,7 @@ async function deleteProject(uid) {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          let url = 'http://localhost:3001/api/projects';
+          let url = 'https://dasw-devcollab-11mh.onrender.com/api/projects';
   
           if (uid) {
             url += `/${uid}`;

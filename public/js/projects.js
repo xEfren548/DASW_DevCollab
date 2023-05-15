@@ -2,7 +2,7 @@ let userEmail = sessionStorage.getItem('user_email')
 
 
 async function getProjects(uid) {
-    let url = 'http://localhost:3001/api/projects';
+    let url = 'https://dasw-devcollab-11mh.onrender.com/api/projects';
     
     if (uid) {
         url += `/${uid}`;
@@ -159,7 +159,7 @@ async function sendProject(){
         let newProject = {title, language, description, endDate, difficulty, creator, creationDate, available};
 
         try {
-          let resp = await fetch('http://localhost:3001/api/projects', {
+          let resp = await fetch('https://dasw-devcollab-11mh.onrender.com/api/projects', {
             method: 'POST',
             body: JSON.stringify(newProject),
             headers: {

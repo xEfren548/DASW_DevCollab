@@ -16,9 +16,9 @@ const app = express();
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json())
-app.use(cors({
-    origin: 'http://127.0.0.1:5500'
-  }));
+// app.use(cors({
+//     origin: 'http://127.0.0.1:5500'
+//   }));
 
 //app.use('/api/tasks', taskRouter)
 app.use('/api/login', authRouter)

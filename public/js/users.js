@@ -4,55 +4,55 @@ async function login() {
   let password = document.getElementById("inputPassword-l").value;
 
   let user = {
-      email: email,
-      password: password
+    email: email,
+    password: password
   };
   console.log(user);
 
   let response = await fetch('/api/login', {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(user)
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(user)
   });
 
   if (response.ok) {
-      let responseBody = await response.json();
-      let token = responseBody.token;
+    let responseBody = await response.json();
+    let token = responseBody.token;
 
-      sessionStorage.setItem('user_token', token);
-      sessionStorage.setItem('user_email', user.email)
-      alert("Usuario logeado correctamente");
+    sessionStorage.setItem('user_token', token);
+    sessionStorage.setItem('user_email', user.email)
+    alert("Usuario logeado correctamente");
   } else {
-      let error = await response.json();
-      alert("Error: " + error.error);
+    let error = await response.json();
+    alert("Error: " + error.error);
   }
 }
 
 
 
 
-  async function Registro() {
+async function Registro() {
 
-        let Nombres = document.getElementById("inputFirstName").value;
-        let Apellidos = document.getElementById("inputLastName").value;
-        let username = document.getElementById("inputUser").value;
-        let email = document.getElementById("inputEmail").value;
-        let password = document.getElementById("inputPassword").value;
-        let confirmedPass = document.getElementById("inputPassword2").value;
-   
-        let body = {
-          "Nombres": Nombres,
-          "Apellidos": Apellidos,
-          "username": username,
-          "email": email,
-          "password": password
-        };
-        console.log(body)
-    
-      
-if (password == confirmedPass) {
+  let Nombres = document.getElementById("inputFirstName").value;
+  let Apellidos = document.getElementById("inputLastName").value;
+  let username = document.getElementById("inputUser").value;
+  let email = document.getElementById("inputEmail").value;
+  let password = document.getElementById("inputPassword").value;
+  let confirmedPass = document.getElementById("inputPassword2").value;
+
+  let body = {
+    "Nombres": Nombres,
+    "Apellidos": Apellidos,
+    "username": username,
+    "email": email,
+    "password": password
+  };
+  console.log(body)
+
+
+  if (password == confirmedPass) {
     fetch("/api/users", {
       method: "POST",
       headers: {
@@ -60,37 +60,36 @@ if (password == confirmedPass) {
       },
       body: JSON.stringify(body)
     })
-    .then(response => {
-      if (response.status == 201 || response.status == 200) {
-        alert("Usuario registrado exitosamente");
-      } else {
-        response.text().then(text => {
-          alert("Error: " + text);
-        });
-      }
-    })
-    .catch(error => {
-      alert("Error: " + error.message);
-    });
+      .then(response => {
+        if (response.status == 201 || response.status == 200) {
+          alert("Usuario registrado exitosamente");
+        } else {
+          response.text().then(text => {
+            alert("Error: " + text);
+          });
+        }
+      })
+      .catch(error => {
+        alert("Error: " + error.message);
+      });
   } else {
     alert("Las contraseñas no coinciden!");
   }
 }
 
-async function renderProfile(){
-<<<<<<< HEAD
-    //let email = sessionStorage.getItem('user_email');
-    //sessionStorage('user','token)
-        let token = sessionStorage.getItem('user_token')
-        console.log("token: " + token);
-        let resp = await fetch('/api/users/tessst1@gmail.com', {
-            method: 'GET'
-          });
-        
-        let user = await resp.json()
-        let profile = document.getElementById('userData');
-        profile.innerHTML = 
-        `
+async function renderProfile() {
+  //let email = sessionStorage.getItem('user_email');
+  //sessionStorage('user','token)
+  let token = sessionStorage.getItem('user_token')
+  console.log("token: " + token);
+  let resp = await fetch('/api/users/tessst1@gmail.com', {
+    method: 'GET'
+  });
+
+  let user = await resp.json()
+  let profile = document.getElementById('userData');
+  profile.innerHTML =
+    `
         <div class="form-group mt-5">
                         <label for="">Nombre</label>
                         <input type="text" name="" id="InputNombre" class="form-control fc-edit-profile" value="${user.Nombres}" aria-describedby="helpId required">
@@ -110,23 +109,22 @@ async function renderProfile(){
                           <label for="">Contraseña</label>
                           <input type="password" name="" id="InputContraseña" class="form-control fc-edit-profile" value="${user.password}" aria-describedby="helpId" required>
                       </div>
-=======
+          `
   let token = sessionStorage.getItem('user_token')
   let email = sessionStorage.getItem('user_email')
   let resp = await fetch(`/api/users/${email}`, {
-      method: 'GET'
-    });
-  
+    method: 'GET'
+  });
+
   let user = await resp.json()
-  console.log("here",user);
+  console.log("here", user);
   let profile = document.getElementById('userData');
-  profile.innerHTML = 
-  `
+  profile.innerHTML =
+    `
   <div class="form-group mt-5">
                   <label for="">Nombre</label>
                   <input type="text" name="" id="InputNombre" class="form-control fc-edit-profile" value="${user.Nombres}" aria-describedby="helpId required">
                 </div>
->>>>>>> 755dacccac510192f081070453bcf5b3ddafcaad
 
                 <div class="form-group">
                     <label for="">Apellido</label>
@@ -141,10 +139,10 @@ async function renderProfile(){
 
                 <button type="submit"  onclick="editarUsuario('${user.email}')" value="Submit" class="form-control fc-edit-profile" > Submit</button>
 
-`
+                `
 
 }
-  
+
 // En la función editarUsuario
 async function editarUsuario(id) {
   const email = document.getElementById("InputEmail").value;
@@ -154,10 +152,10 @@ async function editarUsuario(id) {
 
   let response = await fetch('/api/users/' + id, {
     method: 'PUT',
-    headers: { 'Content-Type': 'application/json'},
-    body: JSON.stringify({"email":email,"password":null,"Nombre":fName,"Apellidos":lName, })
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ "email": email, "password": null, "Nombre": fName, "Apellidos": lName, })
   });
-  if(email){
+  if (email) {
     sessionStorage.setItem('user_email', email)
   }
 
@@ -168,11 +166,11 @@ async function editarUsuario(id) {
 
 }
 
-function borrarLogin(){
+function borrarLogin() {
   let login = document.getElementById('Login')
   let logeado = sessionStorage.getItem('user_email')
-  if (logeado){
-      login.innerHTML = ''
+  if (logeado) {
+    login.innerHTML = ''
   }
 }
 renderProfile()
